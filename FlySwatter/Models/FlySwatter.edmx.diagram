@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="38b138a9936d43c3960ff36f96d88c94" Name="Diagram1">
+        <EntityTypeShape EntityType="SwatterModel.BugUsers" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.Projects" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.ProjectUsers" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketAttachments" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketComments" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketHistories" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketNotifications" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketPriorities" Width="1.5" PointX="3.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.Tickets" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketStatuses" Width="1.5" PointX="3.75" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwatterModel.TicketTypes" Width="1.5" PointX="3.75" PointY="26.25" IsExpanded="true" />
+        <AssociationConnector Association="SwatterModel.FK_ProjectUsers_BugUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketAttachments_BugUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketComments_BugUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketHistories_BugUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketNotifications_BugUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_BugUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_BugUsers2" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_ProjectUsers_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketAttachments_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketComments_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketHistories_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_TicketNotifications_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_TicketPriorities" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_TicketStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_TicketStatuses1" ManuallyRouted="false" />
+        <AssociationConnector Association="SwatterModel.FK_Tickets_TicketTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

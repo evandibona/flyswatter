@@ -1,0 +1,8 @@
+packages/
+FlySwatter/bin/
+FlySwatter/obj/
+FlySwatter/App_Data/
+
+.sass-cache/
+FlySwatter/css/main.css*
+FlySwatter/fonts/
