@@ -169,56 +169,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BugUsers.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FlySwatter.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FlySwatter.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FlySwatter.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FlySwatter.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FlySwatter.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Projects.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProjectUsers.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketAttachments.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketComments.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketHistories.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketNotifications.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketPriorities.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tickets.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketStatuses.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketTypes.cs">
-      <DependentUpon>FlySwatter.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -231,23 +183,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\FlySwatter.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FlySwatter.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\FlySwatter.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FlySwatter.edmx</DependentUpon>
-      <LastGenOutput>FlySwatter.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\FlySwatter.edmx.diagram">
-      <DependentUpon>FlySwatter.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\FlySwatter.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FlySwatter.edmx</DependentUpon>
-      <LastGenOutput>FlySwatter.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
