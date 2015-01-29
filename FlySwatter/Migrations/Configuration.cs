@@ -35,17 +35,16 @@ namespace FlySwatter.Migrations
             {
                 var result = roleManager.Create(new IdentityRole("Submitter")); 
             }
-            if (!context.Users.Any(u => u.Email == "evandibona@gmail.com"))
+            var userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(context)); 
+            var myEmail = "evandibona@gmail.com"; 
+            if (!context.Users.Any(u => u.Email == myEmail))
             {
-                var userStore = new UserStore<ApplicationUser>(context);
-                var userManager = new UserManager<ApplicationUser>(userStore);
-                var user = new ApplicationUser
-                {
-                    UserName = "edibona",
-                    Email = "evandibona@gmail.com",
-                };
-                userManager.Create(user, "scythe");
-                userManager.AddToRole(user.Id, "Admin"); 
+                userManager.Create(new ApplicationUser 
+                { 
+                    UserName = myEmail, 
+                    Email = myEmail, 
+                }, "scythe"); 
             }
         }
     }
