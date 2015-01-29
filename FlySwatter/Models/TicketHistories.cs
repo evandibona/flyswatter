@@ -18,6 +18,6 @@
         public string UserId { get; set; }
 
         public virtual Ticket Ticket { get; set; }
-        public virtual ApplicationUser UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }
