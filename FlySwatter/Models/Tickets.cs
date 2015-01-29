@@ -7,7 +7,10 @@
     {
         public Ticket()
         {
-
+            this.TicketAttachments = new HashSet<TicketAttachment>();
+            this.TicketComments = new HashSet<TicketComment>(); 
+            this.TicketHistories = new HashSet<TicketHistory>(); 
+            this.TicketNotifications = new HashSet<TicketNotification>(); 
         }
 
         public int Id { get; set; }

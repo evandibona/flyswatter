@@ -7,13 +7,13 @@
     {
         public Project()
         {
-            this.ProjectUsers = new HashSet<ProjectUser>(); 
+            this.BugUsers = new HashSet<BugUser>(); 
             this.Tickets = new HashSet<Ticket>(); 
         }
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<ProjectUser> ProjectUsers { get; set; }
+        public virtual ICollection<BugUser> BugUsers { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

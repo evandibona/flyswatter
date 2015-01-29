@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class ProjectUser
+    public partial class BugUser
     {
         public int Id { get; set; }
         public int ProjectId { get; set; }
