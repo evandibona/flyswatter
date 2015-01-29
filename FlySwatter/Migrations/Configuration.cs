@@ -13,6 +13,7 @@ namespace FlySwatter.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(FlySwatter.Models.ApplicationDbContext context)
@@ -42,7 +43,6 @@ namespace FlySwatter.Migrations
                 {
                     UserName = "edibona",
                     Email = "evandibona@gmail.com",
-                    FirstName = "Evan"
                 };
                 userManager.Create(user, "scythe");
                 userManager.AddToRole(user.Id, "Admin"); 
