@@ -149,6 +149,7 @@ namespace FlySwatter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+                // Check displayname, etc. | autoassign roles. 
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
