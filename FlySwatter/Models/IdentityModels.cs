@@ -40,6 +40,6 @@ namespace FlySwatter.Models
         public virtual DbSet<TicketNotification>    TicketNotifications { get; set; }
         public virtual DbSet<TicketPriority>        TicketPriorities { get; set; }
         public virtual DbSet<TicketStatus>          TicketStatus { get; set; }
-        public virtual DbSet<TicketType>            TicketTypes { get; set; } 
+        public virtual DbSet<TicketType>            TicketTypes { get; set; }
     }
 }
