@@ -65,6 +65,11 @@ namespace FlySwatter.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(35, ErrorMessage = "Well something went wrong, check AcntViewModel.cs", MinimumLength=2)] 
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
