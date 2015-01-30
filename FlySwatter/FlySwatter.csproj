@@ -179,7 +179,6 @@
     <Compile Include="Models\TicketPriorities.cs" />
     <Compile Include="Models\TicketAttachments.cs" />
     <Compile Include="Models\Tickets.cs" />
-    <Compile Include="Models\BugUsers.cs" />
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

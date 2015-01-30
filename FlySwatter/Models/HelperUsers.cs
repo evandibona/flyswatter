@@ -14,12 +14,5 @@ namespace FlySwatter.Models
         private static UserManager<ApplicationUser> uman = 
             new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>()); 
-        // AppUser <--> BugUser
-        // BU.appuser  AU.buguser
-        public static ApplicationUser appuser( this BugUser buser)
-        {
-            var puser = uman.Users.First(u => u.Id == buser.UserId);
-            return puser; 
-        }
     }
 }
