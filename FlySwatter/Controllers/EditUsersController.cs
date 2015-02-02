@@ -14,11 +14,22 @@ namespace FlySwatter.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: EditUsers
+        // GET: EditRoles
         public ActionResult Index()
         {
             return View(db.Users.ToList());
         }
+
+        // POST: EditRoles/Update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+
+
 
         /*
         // GET: EditUsers/Details/5
