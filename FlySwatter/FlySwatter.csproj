@@ -161,7 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EditUsersController.cs" />
+    <Compile Include="Controllers\EditRolesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -242,11 +242,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\EditUsers\Create.cshtml" />
-    <Content Include="Views\EditUsers\Delete.cshtml" />
-    <Content Include="Views\EditUsers\Details.cshtml" />
-    <Content Include="Views\EditUsers\Edit.cshtml" />
-    <Content Include="Views\EditUsers\Index.cshtml" />
+    <Content Include="Views\EditRoles\Create.cshtml" />
+    <Content Include="Views\EditRoles\Delete.cshtml" />
+    <Content Include="Views\EditRoles\Details.cshtml" />
+    <Content Include="Views\EditRoles\Edit.cshtml" />
+    <Content Include="Views\EditRoles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

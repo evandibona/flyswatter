@@ -10,7 +10,7 @@ using FlySwatter.Models;
 
 namespace FlySwatter.Controllers
 {
-    public class EditUsersController : Controller
+    public class EditRolesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -25,15 +25,9 @@ namespace FlySwatter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName")] ApplicationUser applicationUser)
+        public ActionResult Update(FormCollection form)
         {
-            if (ModelState.IsValid)
-            {
-                //db.Entry(applicationUser).State = EntityState.Modified;
-                //db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(applicationUser);
+            return RedirectToAction("Index");
         }
 
 

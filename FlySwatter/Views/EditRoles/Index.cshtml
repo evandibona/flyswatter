@@ -1,0 +1,56 @@
+﻿@using FlySwatter.Models;
+@model IEnumerable<FlySwatter.Models.ApplicationUser>
+
+@{
+}
+
+<div class="row" id="manageroles">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("Update", "EditRoles", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            User
+                        </th>
+                        @{ var roles = new string[] { "Submitter", "Developer", "ProjectManager", "Admin" }; }
+                        @foreach (var role in roles)
+                        {
+                            <th>
+                                @role
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <th>@user.Email.Split('@')[0]</th>
+                            @foreach (string role in roles)
+                            {
+                                RoleHelper h = new RoleHelper();
+                                h.IsUserInRole(user.Id, role);
+                                if (h.IsUserInRole(user.Id, role))
+                                {
+                                    <td>
+                                        <input type="checkbox" checked="checked" />
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <input type="checkbox" />
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <input class="btn btn-danger" type="submit" value="Make Changes" />
+        }
+    </div>
+</div>
