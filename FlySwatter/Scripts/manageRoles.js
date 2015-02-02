@@ -3,12 +3,14 @@ $('div#manageroles').ready(rolesClickable)
 function rolesClickable() {
     var users = {}
     var roles = ["Submitter", "Developer", "ProjectManager", "Admin"]
-    $('div#manageroles tbody tr').each(function (i, e) {
+    $('div#manageroles tbody tr').each(function (x, e) {
         var user = jqToString(e)
         users[user] = {}
-        $(e).children('td').each(function (x, y) {
-            $(y).click(function() {
-                flipRole(y)
+        $(e).children('td').each(function (ri, q) {
+            var role = roles[ri] 
+            $(q).click(function() {
+                var action = flipRole(q)
+                users[user][role] = action
             }) 
         })
     })
@@ -22,9 +24,11 @@ function flipRole(el) {
     var attr = $(el).attr('class')
     if (attr == 'nsel') {
         $(el).attr('class', 'sel')
+        return 'rem'
     }
     if (attr == 'sel') {
         $(el).attr('class', 'nsel')
+        return 'add'
     }
 }
 
