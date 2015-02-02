@@ -7,29 +7,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-        </tr>
-    }
-
-</table>
-
-
-<link href="~/Content/myforms.css" rel="stylesheet" /> 
 <div class="row" id="manageroles">
     <div class="col-sm-12">
+        @Html.DisplayForModel("editRoles", "cranky", Model )
         <table class="table">
             <thead>
                 <tr>
