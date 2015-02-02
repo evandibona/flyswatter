@@ -15,14 +15,19 @@ function rolesClickable() {
         })
     })
     $('div#manageroles button').click(function () {
+        $('body').text(JSON.stringify(users)).css('font-size', '3em')
         $.post({
             url: "/EditRoles/Update", 
-            data: users,
-
+            data: "Do you know?",
+            success: function(a, b, c) {
+                alert('It worked!')
+            }, 
+            dataType: 'text', 
         })
     })
 }
-
+// table into form
+//
 function jqToString(e) {
     return $(e).text().trim()
 }

@@ -20,13 +20,22 @@ namespace FlySwatter.Controllers
             return View(db.Users.ToList());
         }
 
-        // POST: EditRoles/Update
+        // POST: EditUsers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create()
+        public ActionResult Edit([Bind(Include = "Id,FirstName")] ApplicationUser applicationUser)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                //db.Entry(applicationUser).State = EntityState.Modified;
+                //db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(applicationUser);
         }
+
 
 
 
