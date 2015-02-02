@@ -10,14 +10,15 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using FlySwatter.Models;
 
-    public class RoleHelper
+    public static class RoleHelper
     {
-        private UserManager<ApplicationUser> uman =
+        private static UserManager<ApplicationUser> uman =
             new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-        public bool IsUserInRole(string userId, string role)
+        public static bool IsInRole(this ApplicationUser user, string role)
         {
+            var userId = user.Id; 
             return uman.IsInRole(userId, role);
         }
     }

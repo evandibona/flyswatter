@@ -17,21 +17,29 @@ namespace FlySwatter.Controllers
         // GET: EditRoles
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var users = new Dictionary<string, UserViewModel>(); 
+            // Iterating over the roles causes an exception. 
+            foreach (var u in db.Users)
+            {
+                users.Add(u.Email, new UserViewModel()); 
+            }
+            foreach (var u in users)
+            {
+                foreach (var r in db.Roles)
+                {
+                    users[u.Key].Roles.Add(r.ToString, "Isinrole?"; 
+                }
+            }
+            return View(users);
         }
 
-        // POST: EditUsers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: EditUsers/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(FormCollection form)
+        public ActionResult Update(IList<ApplicationUser> model)
         {
             return RedirectToAction("Index");
         }
-
-
-
 
 
         /*
