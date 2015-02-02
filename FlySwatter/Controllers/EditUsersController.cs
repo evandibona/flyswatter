@@ -20,6 +20,7 @@ namespace FlySwatter.Controllers
             return View(db.Users.ToList());
         }
 
+        /*
         // GET: EditUsers/Details/5
         public ActionResult Details(string id)
         {
@@ -123,5 +124,6 @@ namespace FlySwatter.Controllers
             }
             base.Dispose(disposing);
         }
+        */
     }
 }

@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using Microsoft.AspNet.Identity; 
-using Microsoft.AspNet.Identity.EntityFramework;
-using FlySwatter.Models; 
-
-namespace FlySwatter.Models
+﻿namespace FlySwatter.Models
 {
-    public static class UsersHelper
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Web.Security; 
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using FlySwatter.Models;
+
+    public class RoleHelper
     {
-        private static UserManager<ApplicationUser> uman = 
+        private UserManager<ApplicationUser> uman =
             new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>()); 
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+        public bool IsUserInRole(string userId, string role)
+        {
+            return uman.IsInRole(userId, role);
+        }
     }
 }

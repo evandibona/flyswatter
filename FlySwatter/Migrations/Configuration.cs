@@ -46,6 +46,8 @@ namespace FlySwatter.Migrations
                     Email = myEmail, 
                 }, "scythe"); 
             }
+            var userId = userManager.FindByEmail(myEmail).Id;
+            userManager.AddToRole(userId, "Admin"); 
         }
     }
 }
