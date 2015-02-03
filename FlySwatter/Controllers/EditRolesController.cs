@@ -17,20 +17,20 @@ namespace FlySwatter.Controllers
         // GET: EditRoles
         public ActionResult Index()
         {
-            var users = new List<UserViewModel>(); 
+            var users = new List<UserViewModel>();
             // Iterating over the roles causes an exception. 
             foreach (var u in db.Users)
             {
-                users.Add(new UserViewModel() { Id = u.Id, Roles = new Dictionary<string, bool>(), Email = u.Email}); 
+                users.Add(new UserViewModel() { Id = u.Id, Roles = new Dictionary<string, bool>(), Email = u.Email });
             }
             foreach (var u in users)
             {
                 foreach (var r in db.Roles)
                 {
-                    var h = new ManageHelpers(); 
+                    var h = new ManageHelpers();
                     var rolename = r.Name;
                     var userId = u.Id;
-                    u.Roles.Add(rolename, h.UserIsInRole(userId, rolename)); 
+                    u.Roles.Add(rolename, h.UserIsInRole(userId, rolename));
                 }
             }
             return View(users);
@@ -41,6 +41,25 @@ namespace FlySwatter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Update(List<UserViewModel> model)
         {
+            foreach (var user in model)
+            {
+                foreach (var role in user.Roles)
+                {
+                    var h = new ManageHelpers();
+                    bool roleIsEnabled = h.UserIsInRole(user.Id, role.Key);
+                    if (roleIsEnabled != role.Value)
+                    {
+                        if (role.Value)
+                        {
+                            h.AddToRole(user.Id, role.Key); 
+                        }
+                        else
+                        {
+                            h.RemoveFromRole(user.Id, role.Key); 
+                        }
+                    }
+                }
+            }
             return RedirectToAction("Index");
         }
 

@@ -32,5 +32,15 @@
         {
             return uman.IsInRole(id, role); 
         }
+        
+        public void AddToRole(string id, string role)
+        {
+            uman.AddToRole(id, role); 
+        }
+        
+        public void RemoveFromRole(string id, string role)
+        {
+            uman.RemoveFromRole(id, role); 
+        }
     }
 }
