@@ -40,7 +40,7 @@ namespace FlySwatter.Controllers
         // POST: EditUsers/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(IList<ApplicationUser> model)
+        public ActionResult Update(Dictionary<string, UserViewModel> model)
         {
             return RedirectToAction("Index");
         }
