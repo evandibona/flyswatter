@@ -48,5 +48,9 @@
         {
             uman.RemoveFromRole(id, role); 
         }
+        public string EmailToId(string email)
+        {
+            return uman.Users.FirstOrDefault(u => u.Email == email).Id; 
+        }
     }
 }
