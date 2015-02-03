@@ -28,7 +28,7 @@ namespace FlySwatter.Controllers
                 foreach (var r in db.Roles)
                 {
                     var h = new ManageHelpers(); 
-                    var rolename = r.ToString();
+                    var rolename = r.Name;
                     var userId = u.Value.Id;
                     Console.WriteLine(u.Key);
                     u.Value.Roles.Add(rolename, h.UserIsInRole(userId, rolename)); 
