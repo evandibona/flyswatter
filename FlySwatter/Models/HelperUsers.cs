@@ -32,6 +32,12 @@
         {
             return uman.IsInRole(id, role); 
         }
+
+        public string[] UserHasRoles(string id)
+        {
+            IList<string> a = uman.GetRoles(id); 
+            return a.ToArray(); 
+        }
         
         public void AddToRole(string id, string role)
         {
