@@ -15,6 +15,7 @@ namespace FlySwatter.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Users/Roles
+        [Authorize(Roles="Admin")]
         public ActionResult Roles()
         {
             var users = new List<UserViewModel>();
@@ -39,6 +40,7 @@ namespace FlySwatter.Controllers
         // POST: Users/Roles
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public ActionResult Roles(List<UserViewModel> model)
         {
             foreach (var user in model)
