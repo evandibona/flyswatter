@@ -21,13 +21,17 @@ namespace FlySwatter.Controllers
             // Iterating over the roles causes an exception. 
             foreach (var u in db.Users)
             {
-                users.Add(u.Email, new UserViewModel()); 
+                users.Add(u.Email, new UserViewModel() { Id = u.Id, Roles = new Dictionary<string, bool>() }); 
             }
             foreach (var u in users)
             {
                 foreach (var r in db.Roles)
                 {
-                    users[u.Key].Roles.Add(r.ToString, "Isinrole?"; 
+                    var h = new ManageHelpers(); 
+                    var rolename = r.ToString();
+                    var userId = u.Value.Id;
+                    Console.WriteLine(u.Key);
+                    u.Value.Roles.Add(rolename, h.UserIsInRole(userId, rolename)); 
                 }
             }
             return View(users);
