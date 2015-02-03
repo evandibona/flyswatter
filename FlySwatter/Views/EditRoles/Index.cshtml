@@ -31,6 +31,8 @@
                             <th>
                                 @{ var userName = Model[i].Email.Split('@')[0].Trim(); } 
                                 @userName
+                                @Html.HiddenFor(m => m[i].Email)
+                                @Html.HiddenFor(m => m[i].Id)
                             </th>
                             @foreach (var role in roles)
                             {
