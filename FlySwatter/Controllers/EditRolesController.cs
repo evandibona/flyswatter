@@ -17,11 +17,11 @@ namespace FlySwatter.Controllers
         // GET: EditRoles
         public ActionResult Index()
         {
-            var users = new Dictionary<string, UserViewModel>(); 
+            var users = new List<UserViewModel>(); 
             // Iterating over the roles causes an exception. 
             foreach (var u in db.Users)
             {
-                users.Add(u.Email, new UserViewModel() { Id = u.Id, Roles = new Dictionary<string, bool>() }); 
+                users.Add(new UserViewModel() { Id = u.Id, Roles = new Dictionary<string, bool>(), Email = u.Email}); 
             }
             foreach (var u in users)
             {
@@ -29,9 +29,8 @@ namespace FlySwatter.Controllers
                 {
                     var h = new ManageHelpers(); 
                     var rolename = r.Name;
-                    var userId = u.Value.Id;
-                    Console.WriteLine(u.Key);
-                    u.Value.Roles.Add(rolename, h.UserIsInRole(userId, rolename)); 
+                    var userId = u.Id;
+                    u.Roles.Add(rolename, h.UserIsInRole(userId, rolename)); 
                 }
             }
             return View(users);
@@ -40,7 +39,7 @@ namespace FlySwatter.Controllers
         // POST: EditUsers/Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(Dictionary<string, UserViewModel> model)
+        public ActionResult Update(List<UserViewModel> model)
         {
             return RedirectToAction("Index");
         }
