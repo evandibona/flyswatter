@@ -10,12 +10,12 @@ using FlySwatter.Models;
 
 namespace FlySwatter.Controllers
 {
-    public class EditRolesController : Controller
+    public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: EditRoles
-        public ActionResult Index()
+        // GET: Users/Roles
+        public ActionResult Roles()
         {
             var users = new List<UserViewModel>();
             // Iterating over the roles causes an exception. 
@@ -36,10 +36,10 @@ namespace FlySwatter.Controllers
             return View(users);
         }
 
-        // POST: EditUsers/Update
+        // POST: Users/Roles
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(List<UserViewModel> model)
+        public ActionResult Roles(List<UserViewModel> model)
         {
             foreach (var user in model)
             {
@@ -60,12 +60,12 @@ namespace FlySwatter.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Roles");
         }
 
 
         /*
-        // GET: EditUsers/Details/5
+        // GET: Users/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -80,13 +80,13 @@ namespace FlySwatter.Controllers
             return View(applicationUser);
         }
 
-        // GET: EditUsers/Create
+        // GET: Users/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EditUsers/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -103,7 +103,7 @@ namespace FlySwatter.Controllers
             return View(applicationUser);
         }
 
-        // GET: EditUsers/Edit/5
+        // GET: Users/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -118,7 +118,7 @@ namespace FlySwatter.Controllers
             return View(applicationUser);
         }
 
-        // POST: EditUsers/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -134,7 +134,7 @@ namespace FlySwatter.Controllers
             return View(applicationUser);
         }
 
-        // GET: EditUsers/Delete/5
+        // GET: Users/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -149,7 +149,7 @@ namespace FlySwatter.Controllers
             return View(applicationUser);
         }
 
-        // POST: EditUsers/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
