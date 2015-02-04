@@ -16,7 +16,7 @@ namespace FlySwatter.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(FlySwatter.Models.ApplicationDbContext context)
+        private void seedRoles(ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context)); 
             if (!context.Roles.Any(r => r.Name == "Admin")) 
@@ -35,6 +35,39 @@ namespace FlySwatter.Migrations
             {
                 var result = roleManager.Create(new IdentityRole("Submitter")); 
             }
+        }
+
+        private void seedTicketStatuses(ApplicationDbContext context)
+        {
+            if (!context.TicketStatus.Any(s => s.Name == "Complete"))
+            {
+                var r = context.TicketStatus.Add(new TicketStatus{Name = "Complete"}); 
+            }
+            if (!context.TicketStatus.Any(s => s.Name == "In Progress"))
+            {
+                var r = context.TicketStatus.Add(new TicketStatus{Name = "In Progress"}); 
+            }
+        }
+        private void seedTicketTypes(ApplicationDbContext context)
+        {
+            var names = new string[] { "Bug", "Feature", "Ideas" };
+            foreach (string n in names)
+            {
+                if (!context.TicketTypes.Any(t => t.Name == n))
+                {
+                    var r = context.TicketTypes.Add(new TicketType { Name = n }); 
+                }
+            }
+        }
+        private void seedTicketPriorities(ApplicationDbContext context)
+        {
+
+        }
+        protected override void Seed(FlySwatter.Models.ApplicationDbContext context)
+        {
+            seedRoles(context);
+            seedTicketStatuses(context);
+            seedTicketTypes(context); 
             var userManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context)); 
             var myEmail = "evandibona@gmail.com"; 
