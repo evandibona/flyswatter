@@ -1,6 +1,6 @@
 @import "_colors-elena.scss";
 @import "_color-me-anything.scss";
-@import "_my-bootstrap.scss"; 
+@import "_my-bootstrap.scss";
 body {
   padding-top: 50px;
   padding-bottom: 20px;
@@ -21,5 +21,33 @@ body {
   select,
   textarea {
     max-width: 280px;
+  }
+}
+
+.row {
+  ::selection {
+    color: $blue;
+    background: $yellow;
+  }
+  ::-moz-selection {
+    color: $blue;
+    background: $yellow;
+  }
+  a {
+    font-weight: 400;
+    color: black;
+    padding-bottom: 1px;
+    border-bottom: 3px solid $khaki;
+    &:hover {
+      color: gray;
+      padding-bottom: 5px;
+      text-decoration: none;
+    }
+  }
+  h2 {
+    color: $indigo;
+  }
+  h3 {
+    color: $brown;
   }
 }

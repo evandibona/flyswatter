@@ -1,6 +1,10 @@
 ﻿
-<div class="row">
+<div class="admin-panel row">
     <div class="col-sm-12">
-        <h2 style="color: cornflowerblue; ">Whole Site Administration</h2>
+        <div class="admin-projects">
+            <h2> Projects </h2>
+            @Html.ActionLink("Create", "Create", "Projects", new { })
+            @Html.ActionLink("Manage", "Edit", "Projects", new { })
+        </div>
     </div>
 </div>
