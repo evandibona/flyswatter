@@ -56,6 +56,7 @@ namespace FlySwatter.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticket.Created = DateTimeOffset.Now; 
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
