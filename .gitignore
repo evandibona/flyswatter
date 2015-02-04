@@ -4,5 +4,6 @@ FlySwatter/obj/
 FlySwatter/App_Data/
 
 .sass-cache/
-FlySwatter/Content/main.css*
+FlySwatter/Content/Site.css*
 FlySwatter/fonts/
+t.sh

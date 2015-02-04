@@ -1,0 +1,19 @@
+.btn-danger {
+  background: $red;
+}
+.navbar {
+  background: $teal;
+}
+.navbar-inverse
+{
+  .navbar-nav > li > a {
+    color: $white;
+    &:hover {
+      color: $white;
+      background: mix($teal, black);
+    }
+  }
+  .navbar-brand {
+    color: $white;
+  }
+}
