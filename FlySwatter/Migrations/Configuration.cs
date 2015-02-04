@@ -61,13 +61,21 @@ namespace FlySwatter.Migrations
         }
         private void seedTicketPriorities(ApplicationDbContext context)
         {
-
+            var names = new string[] { "Low", "Moderate", "High", "Most Important Thing In The World!" };
+            foreach (string n in names)
+            {
+                if (!context.TicketPriorities.Any(p => p.Name == n))
+                {
+                    var r = context.TicketPriorities.Add(new TicketPriority { Name = n }); 
+                }
+            }
         }
         protected override void Seed(FlySwatter.Models.ApplicationDbContext context)
         {
             seedRoles(context);
             seedTicketStatuses(context);
-            seedTicketTypes(context); 
+            seedTicketTypes(context);
+            seedTicketPriorities(context); 
             var userManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context)); 
             var myEmail = "evandibona@gmail.com"; 
