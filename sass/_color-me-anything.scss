@@ -1,8 +1,11 @@
 .btn-danger {
   background: $red;
+  &:hover {
+    background: mix($red, black, 90%);
+  }
 }
 .navbar {
-  background: $teal;
+  background: $blue;
 }
 .navbar-inverse
 {
@@ -10,7 +13,7 @@
     color: $white;
     &:hover {
       color: $white;
-      background: mix($teal, black);
+      background: mix($blue, $teal);
     }
   }
   .navbar-brand {
