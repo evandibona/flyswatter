@@ -10,6 +10,7 @@ using FlySwatter.Models;
 
 namespace FlySwatter.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,6 +37,7 @@ namespace FlySwatter.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Create()
         {
             return View();
@@ -46,6 +48,7 @@ namespace FlySwatter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Create([Bind(Include = "Id,Name")] Project project)
         {
             if (ModelState.IsValid)
@@ -59,6 +62,7 @@ namespace FlySwatter.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +82,7 @@ namespace FlySwatter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Edit([Bind(Include = "Id,Name")] Project project)
         {
             if (ModelState.IsValid)
@@ -90,6 +95,7 @@ namespace FlySwatter.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +113,7 @@ namespace FlySwatter.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.Projects.Find(id);
