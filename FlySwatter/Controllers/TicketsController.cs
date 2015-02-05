@@ -44,6 +44,7 @@ namespace FlySwatter.Controllers
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
+            ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             return View();
         }
 
