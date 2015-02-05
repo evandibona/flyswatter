@@ -39,9 +39,9 @@ namespace FlySwatter.Migrations
 
         private void seedTicketStatuses(ApplicationDbContext context)
         {
-            if (!context.TicketStatus.Any(s => s.Name == "Complete"))
+            if (!context.TicketStatus.Any(s => s.Name == "Completed"))
             {
-                var r = context.TicketStatus.Add(new TicketStatus{Name = "Complete"}); 
+                var r = context.TicketStatus.Add(new TicketStatus{Name = "Completed"}); 
             }
             if (!context.TicketStatus.Any(s => s.Name == "In Progress"))
             {
