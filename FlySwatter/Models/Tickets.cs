@@ -20,7 +20,7 @@
         public Nullable<DateTimeOffset> Updated { get; set; }
         public int ProjectId { get; set; }
         public int TicketTypeId { get; set; }
-        public int TickePriorityId { get; set; }
+        public int TicketPriorityId { get; set; }
         public int TicketStatusId { get; set; }
         public string OwnerUserId { get; set; }
         public string AssignedUserId { get; set; }
