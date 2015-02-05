@@ -5,7 +5,7 @@
 
     public partial class TicketPriority
     {
-        public  TicketPriority()
+        public TicketPriority()
         {
             this.Tickets = new HashSet<Ticket>(); 
         }
