@@ -40,6 +40,7 @@ namespace FlySwatter.Controllers
         [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Create()
         {
+            ViewBag.Users = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 

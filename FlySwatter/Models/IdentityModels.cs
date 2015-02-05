@@ -33,6 +33,7 @@ namespace FlySwatter.Models
         }
 
         public virtual DbSet<Project>               Projects { get; set; }
+        public virtual DbSet<ProjectUsers>          ProjectUsers { get; set; }
         public virtual DbSet<Ticket>                Tickets { get; set; }
         public virtual DbSet<TicketAttachment>      TicketAttachments { get; set; }
         public virtual DbSet<TicketComment>         TicketComments { get; set; }
