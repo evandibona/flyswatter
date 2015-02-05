@@ -100,6 +100,7 @@ namespace FlySwatter.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticket.Updated = DateTimeOffset.Now; 
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
