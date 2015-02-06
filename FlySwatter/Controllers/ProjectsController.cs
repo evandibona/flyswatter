@@ -65,17 +65,6 @@ namespace FlySwatter.Controllers
             }
 
             db.SaveChanges();
-
-            // projUsers.Add({UserId = userId, ProjectId = id}); 
-            /*
-            if (ModelState.IsValid)
-            {
-                db.Projects.Add(proView);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            */
-
             return RedirectToAction("Index");
         }
 
