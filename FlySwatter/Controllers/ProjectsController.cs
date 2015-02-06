@@ -37,11 +37,12 @@ namespace FlySwatter.Controllers
         }
 
         // GET: Projects/Create
-        [Authorize(Roles="Admin, ProjectManager")] 
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
-            return View();
+            var project = new Project();
+            ViewBag.Users = db.Users.ToList();
+            return View(project);
         }
 
         // POST: Projects/Create
@@ -49,19 +50,33 @@ namespace FlySwatter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="Admin, ProjectManager")] 
-        public ActionResult Create([Bind(Include = "Id,Name,AssignedUserId")] Project project)
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public ActionResult Create(string Name, List<string> Users)
         {
-            // project.Add({Name = name, Id = id}); 
+            var projectUsers = Users.Select(u => db.Users.Find(u)).ToList();
+
+            var project = new Project { Name = Name };
+            db.Projects.Add(project); 
+
+
+            foreach(var user in projectUsers)
+            {
+                user.Projects.Add(project);
+            }
+
+            db.SaveChanges();
+
             // projUsers.Add({UserId = userId, ProjectId = id}); 
+            /*
             if (ModelState.IsValid)
             {
-                db.Projects.Add(project);
+                db.Projects.Add(proView);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            */
 
-            return View(project);
+            return RedirectToAction("Index");
         }
 
         // GET: Projects/Edit/5

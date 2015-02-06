@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace FlySwatter.Models
 {
@@ -17,8 +18,20 @@ namespace FlySwatter.Models
             return userIdentity;
         }
 
+        public ApplicationUser()
+        {
+            this.AssignedTickets = new HashSet<Ticket>();
+            this.Projects = new HashSet<Project>();
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+
+        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<Ticket> AssignedTickets { get; set; }
+
+
     }
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -33,7 +46,7 @@ namespace FlySwatter.Models
         }
 
         public virtual DbSet<Project>               Projects { get; set; }
-        public virtual DbSet<ProjectUsers>          ProjectUsers { get; set; }
+        //public virtual DbSet<ProjectUsers>          ProjectUsers { get; set; }
         public virtual DbSet<Ticket>                Tickets { get; set; }
         public virtual DbSet<TicketAttachment>      TicketAttachments { get; set; }
         public virtual DbSet<TicketComment>         TicketComments { get; set; }
