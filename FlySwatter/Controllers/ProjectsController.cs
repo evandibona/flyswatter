@@ -40,7 +40,7 @@ namespace FlySwatter.Controllers
         [Authorize(Roles="Admin, ProjectManager")] 
         public ActionResult Create()
         {
-            ViewBag.Users = new SelectList(db.Users, "Id", "Email");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -50,8 +50,10 @@ namespace FlySwatter.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles="Admin, ProjectManager")] 
-        public ActionResult Create([Bind(Include = "Id,Name")] Project project)
+        public ActionResult Create([Bind(Include = "Id,Name,AssignedUserId")] Project project)
         {
+            // project.Add({Name = name, Id = id}); 
+            // projUsers.Add({UserId = userId, ProjectId = id}); 
             if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
