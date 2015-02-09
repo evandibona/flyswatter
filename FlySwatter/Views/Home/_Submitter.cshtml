@@ -1,12 +1,28 @@
-﻿
-<div class="row">
+﻿@model FlySwatter.Models.TicketTableViewModel 
+<div class="row submitter">
     <div class="col-sm-12">
-        <div class="submitter">
-            <div class="tickets">
-                <h4> Tickets </h4>
-                @Html.ActionLink("Create", "Create", "Tickets")
-                @Html.ActionLink("Manage", "Index", "Tickets")
-            </div>
-        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> Priority </th>
+                    <th> Name </th>
+                    <th> Project </th>
+                    <th> Created </th>
+                    <th> Description </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model.Tickets)
+                {
+                    <tr>
+                        <td> @ticket.TicketPriority.Name </td>
+                        <td> @ticket.Title </td>
+                        <td> @ticket.Project.Name </td>
+                        <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
+                        <td> @ticket.Description </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

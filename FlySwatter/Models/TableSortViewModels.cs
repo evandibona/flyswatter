@@ -7,8 +7,8 @@ namespace FlySwatter.Models
 {
     public class TicketTableViewModel
     {
-        public Dictionary<string, char> sorters { get; set; }
-        public Dictionary<string, string> search { get; set; }
+        public Dictionary<string, char> Sorters { get; set; }
+        public Dictionary<string, string> Search { get; set; }
         public List<Ticket> Tickets { get; set; }
     }
 }
