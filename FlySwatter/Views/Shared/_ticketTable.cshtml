@@ -1,17 +1,26 @@
-﻿@model IEnumerable<FlySwatter.Models.Ticket> 
+﻿@model IEnumerable<FlySwatter.Models.Ticket>
+@{
+    Layout = null;
+}
 
-<table class="table-striped">
-    <tr>
-        <th> Priority </th>
-        <th> Name </th>
-        <th> Project </th>
-        <th> Created </th>
-        <th> Description </th>
-    </tr>
-    @foreach (var ticket in Model)
-    {
+<table class="table table-striped">
+    <thead>
         <tr>
-            <td>ticket.Name</td>
+            <th> Priority </th>
+            <th> Name </th>
+            <th> Project </th>
+            <th> Created </th>
+            <th> Description </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        <tr>
+            <td> Hello </td>
+            <td> Wax </td>
+            <td> Candles</td>
+            <td> l'acqua </td>
+            <td> Why? </td>
+        </tr>
+        @Model.sorters.ToString() 
+    </tbody>
 </table>
