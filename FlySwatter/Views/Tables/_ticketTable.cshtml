@@ -1,0 +1,17 @@
+﻿@model IEnumerable<FlySwatter.Models.Ticket> 
+
+<table class="table-striped">
+    <tr>
+        <th> Priority </th>
+        <th> Name </th>
+        <th> Project </th>
+        <th> Created </th>
+        <th> Description </th>
+    </tr>
+    @foreach (var ticket in Model)
+    {
+        <tr>
+            <td>ticket.Name</td>
+        </tr>
+    }
+</table>
