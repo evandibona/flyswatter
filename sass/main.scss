@@ -52,3 +52,9 @@ body {
     color: $brown;
   }
 }
+
+.force-top-right {
+  position: absolute; 
+  right: 0; 
+  margin-right: 2em; 
+} 
