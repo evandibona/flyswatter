@@ -1,12 +1,16 @@
 ﻿
 <div class="admin-panel row">
     <div class="col-sm-12">
-        <div class="admin-projects">
+        <div class="admin">
             <h4> Projects </h4>
-            @Html.ActionLink("Create", "Create", "Projects")
-            @Html.ActionLink("Manage", "Index", "Projects")
-            <h4> Roles </h4>
-            @Html.ActionLink("Manage", "Roles", "Users")
+            <div class="projects">
+                @Html.ActionLink("Create", "Create", "Projects")
+                @Html.ActionLink("Manage", "Index", "Projects")
+            </div>
+            <div class="roles">
+                <h4> Roles </h4>
+                @Html.ActionLink("Manage", "Roles", "Users")
+            </div>
         </div>
     </div>
 </div>

@@ -23,8 +23,14 @@ body {
   textarea {
     max-width: 280px;
   }
+  a {
+    color: #606060;
+    &:hover { color: $grape; }
+  }
 }
-
+#login-status {
+  font-weight: 600;
+}
 .row {
   ::selection {
     color: $blue;
@@ -49,12 +55,12 @@ body {
     color: $indigo;
   }
   h3 {
-    color: $brown;
+    color: $red;
   }
 }
 
 .force-top-right {
-  position: absolute; 
-  right: 0; 
-  margin-right: 2em; 
-} 
+  position: absolute;
+  right: 0;
+  margin-right: 2em;
+}
