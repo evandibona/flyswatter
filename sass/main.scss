@@ -1,66 +1,23 @@
 @import "_colors-elena.scss";
-@import "_color-me-anything.scss";
-@import "_my-bootstrap.scss";
+@import "_icons.scss";
 
 body {
-  padding-top: 50px;
+  padding-top: 65px;
   padding-bottom: 1em;
-  /* Set padding to keep content from hitting the edges */
-  .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  /* Override the default bootstrap behavior where horizontal description lists
-  will truncate terms that are too long to fit in the left column
-  */
-  .dl-horizontal dt {
-    white-space: normal;
-  }
-
-  /* Set width on the form input elements since they're 100% wide by default */
-  input,
-  select,
-  textarea {
-    max-width: 280px;
-  }
-  a {
-    color: #606060;
-    &:hover { color: $grape; }
-  }
 }
-#login-status {
-  font-weight: 600;
-}
+.navbar-right {
+  margin-right: 0px; 
+} 
 .row {
   ::selection {
-    color: $blue;
-    background: $yellow;
+    color: $cream;
+    background: $blue; 
   }
   ::-moz-selection {
-    color: $blue;
-    background: $yellow;
+    color: $cream;
+    background: $blue;
   }
   a {
-    font-weight: 400;
-    color: black;
-    padding-bottom: 1px;
-    border-bottom: 3px solid $khaki;
-    &:hover {
-      color: gray;
-      padding-bottom: 5px;
-      text-decoration: none;
-    }
-  }
-  h2 {
-    color: $indigo;
-  }
-  h3 {
-    color: $red;
-  }
-}
-
-.force-top-right {
-  position: absolute;
-  right: 0;
-  margin-right: 2em;
+    color: $blue; 
+  } 
 }
