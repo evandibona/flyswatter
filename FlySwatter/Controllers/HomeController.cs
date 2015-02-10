@@ -15,10 +15,21 @@ namespace FlySwatter.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            var sortParams = new Dictionary<string,string>(); 
+            var sortParams = new Dictionary<string,string>();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToString().Trim();
+                tickets = tickets.Where(t => t.Title.Contains(searchString)
+                        || t.Description.Contains(searchString) 
+                        || t.OwnerUser.Email.Contains(searchString) 
+                        || t.Project.Name.Contains(searchString) 
+                        || t.TicketType.Name.Contains(searchString) 
+                    ); 
+            }
 
             switch (sortOrder)
             {

@@ -57,10 +57,10 @@ namespace FlySwatter.Controllers
         {
             if (ModelState.IsValid)
             {
-                ticket.Created = DateTimeOffset.Now; 
+                ticket.Created = DateTimeOffset.Now;
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToActionPermanent("Index", "Home");
             }
 
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name", ticket.TicketStatusId);
@@ -83,7 +83,7 @@ namespace FlySwatter.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId); 
+            ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name", ticket.TicketStatusId);
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeId);
             ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "Email", ticket.AssignedUserId);
@@ -102,9 +102,9 @@ namespace FlySwatter.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
-                ticket.Updated = DateTimeOffset.Now; 
+                ticket.Updated = DateTimeOffset.Now;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToActionPermanent("Index", "Home");
             }
             //Remove this stuff below? 
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);
@@ -139,7 +139,7 @@ namespace FlySwatter.Controllers
             Ticket ticket = db.Tickets.Find(id);
             db.Tickets.Remove(ticket);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToActionPermanent("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

@@ -2,32 +2,50 @@
 
 @{
     ViewBag.Title = "Details";
+
+    var emphasis = new Dictionary<int, string>();
+    emphasis.Add(1, "text-muted"); emphasis.Add(2, "text-warning");
+    emphasis.Add(4, "text-danger"); emphasis.Add(3, "text-primary");
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+@switch (Model.TicketStatus.Name)
+{
+    case "Completed":
+        <h4 class="btn btn-success">Completed</h4>
+        break;
+    case "In Progress":
+    <h4 class="btn btn-info">In Progress</h4>
+        break;
+    default:
+    <h4 class="btn btn-danger">???</h4>
+        break;
+}
+<h4 class="@emphasis[Model.TicketPriorityId]"> @Html.DisplayFor(model => model.TicketPriority.Name) </h4>
 
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+</p>
 <div>
-    <h4>Ticket</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignedUser.FirstName)
-        </dt>
 
+        <dt>
+            User(s) Assigned
+        </dt>
         <dd>
-            @Html.DisplayFor(model => model.AssignedUser.FirstName)
+            @Html.DisplayFor(model => model.AssignedUser.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
+            Owner
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.OwnerUser.FirstName)
+            @Html.DisplayFor(model => model.OwnerUser.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Project.Name)
+            Project
         </dt>
 
         <dd>
@@ -35,37 +53,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TicketStatus.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TicketStatus.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.TicketType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TicketType.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Created)
         </dt>
@@ -74,25 +67,16 @@
             @Html.DisplayFor(model => model.Created)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TickePriorityId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TickePriorityId)
-        </dd>
+        @if (Model.Updated.HasValue)
+        {
+            <dt> Updated </dt>
+            <dd> @Model.Updated.Value </dd>
+        }
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@if (Model.Description != null)
+{
+    <h5> Description </h5>
+    <p> @Model.Description </p>
+}
