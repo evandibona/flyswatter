@@ -1,18 +1,26 @@
-﻿@model FlySwatter.Models.TicketTableViewModel 
+﻿@model List<FlySwatter.Models.Ticket> 
 <div class="row submitter">
     <div class="col-sm-12">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th> Priority </th>
-                    <th> Name </th>
-                    <th> Project </th>
-                    <th> Created </th>
+                    <th>
+                        @Html.ActionLink("Priority", "Index", new { sortOrder = "priority" }) 
+                    </th>
+                    <th>
+                        @Html.ActionLink("Name", "Index", new { sortOrder = "title" }) 
+                    </th>
+                    <th>
+                        @Html.ActionLink("Project", "Index", new { sortOrder = "project" }) 
+                    </th>
+                    <th>
+                        @Html.ActionLink("Created", "Index", new { sortOrder = "created" }) 
+                    </th>
                     <th> Description </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ticket in Model.Tickets)
+                @foreach (var ticket in Model)
                 {
                     <tr>
                         <td> @ticket.TicketPriority.Name </td>
