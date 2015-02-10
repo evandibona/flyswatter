@@ -8,5 +8,6 @@ namespace FlySwatter.Models
     public class HomeView
     {
         public List<Ticket> Tickets { get; set; }
+        public Dictionary<string, string> TicketSortParams { get; set; } 
     }
 }
