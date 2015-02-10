@@ -4,22 +4,23 @@
     background: mix($red, black, 90%);
   }
 }
+$navColor: $teal; 
 .navbar {
-  background: $teal;
+  background: $navColor;
+  a {
+    color: white; 
+  } 
 }
-.navbar-inverse
-{
+.navbar-default {
   .navbar-nav > li > a {
-    color: $white;
-    &:hover {
-      color: $white;
-      background: $blue;
-    }
+    color: white; 
+    &:hover { color: $white; background: darken($navColor, 6%); } 
   }
   .navbar-brand {
-    color: $white;
-  }
-}
+    color: white; 
+    &:hover { color: $white; background: darken($navColor, 6%); } 
+  } 
+} 
 .row {
   ::selection {
     color: $blue;

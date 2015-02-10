@@ -11,9 +11,25 @@
 </head>
 <body>
     <div class="container body-content">
-        <div class="force-top-right" id="login-status">
-            @Html.Partial("_LoginPartial")
-        </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Flyswatter</a>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="my-navbar-collapse">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+
+
+
         @RenderBody()
         <hr />
         <footer>
