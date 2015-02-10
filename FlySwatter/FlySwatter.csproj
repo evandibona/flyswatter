@@ -173,7 +173,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\HelperUsers.cs" />
-    <Compile Include="Models\TableSortViewModels.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\ProjectUsersView.cs" />
     <Compile Include="Models\RoleViewModels.cs" />
     <Compile Include="Models\TicketComments.cs" />

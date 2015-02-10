@@ -1,4 +1,4 @@
-﻿@model FlySwatter.Models.TicketTableViewModel 
+﻿@model List<FlySwatter.Models.Ticket> 
 <div class="row submitter">
     <div class="col-sm-12">
         <table class="table table-striped">
@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ticket in Model.Tickets)
+                @foreach (var ticket in Model)
                 {
                     <tr>
                         <td> @ticket.TicketPriority.Name </td>

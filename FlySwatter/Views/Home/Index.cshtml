@@ -1,4 +1,4 @@
-﻿@model FlySwatter.Models.TicketTableViewModel 
+﻿@model FlySwatter.Models.HomeView
 @using FlySwatter.Models; 
 @{
     ViewBag.Title = "Home";
@@ -7,15 +7,19 @@
 <!-- This page should not even be shown unless the user is authenticated. -->
 @if(HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    var blocks = new Dictionary<string, string>();
-    blocks.Add("Admin", "_Administrator"); blocks.Add("ProjectManager", "_ProjectManager");
-    blocks.Add("Developer", "_Developer"); blocks.Add("Submitter", "_Submitter");
     var h = new ManageHelpers(); 
     string email = HttpContext.Current.User.Identity.Name;
     string userId = h.EmailToId(email);
     string[] roles = h.UserHasRoles(userId);
     foreach (var r in roles)
     {
-        Html.RenderPartial(blocks[r], Model); 
+        switch (r)
+        {
+            case "Submitter":
+                Html.RenderPartial("_Submitter", Model.Tickets);
+                break; 
+            default:
+                break; 
+        }
     }
 }

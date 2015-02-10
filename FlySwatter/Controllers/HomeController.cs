@@ -15,15 +15,27 @@ namespace FlySwatter.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            var sorters = new Dictionary<string, char>(); 
-            foreach (var a in new string[] {"Priority", "Name", "Project", "Created", "Description"})
+
+            switch (id)
             {
-                sorters.Add(a, '0'); 
+                case "title_desc":
+                    tickets = tickets.OrderByDescending(t => t.Title);
+                    break; 
+                case "Created":
+                    tickets = tickets.OrderBy(t => t.Created);
+                    break; 
+                case "created_desc":
+                    tickets = tickets.OrderByDescending(t => t.Created);
+                    break; 
+                default:
+                    tickets = tickets.OrderBy(t => t.Title); 
+                    break;
             }
-            var model = new TicketTableViewModel() { Sorters = sorters, Tickets = tickets.ToList() }; 
+
+            var model = new HomeView() { Tickets = tickets.ToList() }; 
             return View(model);
         }
     }
