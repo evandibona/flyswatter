@@ -60,7 +60,8 @@ namespace FlySwatter.Controllers
             }
 
             var model = new HomeView() { Tickets = tickets.ToList() };
-            model.TicketSortParams = sortParams; 
+            model.Users = db.Users.ToList(); 
+            model.Projects = db.Projects.ToList(); 
             return View(model);
         }
     }

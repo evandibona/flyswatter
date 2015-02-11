@@ -11,11 +11,43 @@
         <div class="col-sm-12">
             @using (Html.BeginForm())
             {
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." id="SearchString" name="SearchString" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button">Search!</button>
-                    </span>
+                <div class="btn-group">
+                    <div class="btn-group">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Owner
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            @foreach (var user in Model.Users)
+                            {
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="owner" name="owner">@user.Email.ToString()</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Assigned User
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            @foreach (var user in Model.Users)
+                            {
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@user.Email.ToString()</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Project
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            @foreach (var project in Model.Projects)
+                            {
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@project.Name.ToString()</a></li>
+                            }
+                        </ul>
+                    </div>
                 </div>
             }
             <table class="table table-striped">
@@ -39,16 +71,26 @@
                 <tbody>
                     @foreach (var ticket in Model.Tickets)
                     {
-                    <tr>
-                        <td> @ticket.TicketPriority.Name </td>
-                        <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
-                        <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
-                        <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
-                        <td> @ticket.Description </td>
-                    </tr>
+                        <tr>
+                            <td> @ticket.TicketPriority.Name </td>
+                            <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
+                            <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
+                            <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
+                            <td> @ticket.Description </td>
+                        </tr>
                     }
                 </tbody>
             </table>
+            @using (Html.BeginForm())
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." id="searchString" name="searchString" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button">Search!</button>
+                    </span>
+                </div>
+            }
         </div>
     </div>
+    <div class="row" style="height: 10em"></div>
 }
