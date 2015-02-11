@@ -56,10 +56,10 @@ namespace FlySwatter.Controllers
             var projectUsers = Users.Select(u => db.Users.Find(u)).ToList();
 
             var project = new Project { Name = Name };
-            db.Projects.Add(project); 
+            db.Projects.Add(project);
 
 
-            foreach(var user in projectUsers)
+            foreach (var user in projectUsers)
             {
                 user.Projects.Add(project);
             }
@@ -69,7 +69,7 @@ namespace FlySwatter.Controllers
         }
 
         // GET: Projects/Edit/5
-        [Authorize(Roles="Admin, ProjectManager")] 
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +81,7 @@ namespace FlySwatter.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Users = db.Users.ToList();
             return View(project);
         }
 
@@ -89,20 +90,36 @@ namespace FlySwatter.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="Admin, ProjectManager")] 
-        public ActionResult Edit([Bind(Include = "Id,Name")] Project project)
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public ActionResult Edit(string Name, List<string> SelectedUsers)
         {
-            if (ModelState.IsValid)
+            Project project = db.Projects.First(p => p.Name == Name);
+            if (SelectedUsers != null)
             {
-                db.Entry(project).State = EntityState.Modified;
+                var usersToRem = new List<string>();
+                foreach (var user in project.Users)
+                {
+                    SelectedUsers.Contains("maggiore");
+                    if (!SelectedUsers.Contains(user.Email))
+                    {
+                        project.Users.Remove(user);
+                    }
+                }
+                foreach (var userEmail in SelectedUsers)
+                {
+                    var user = db.Users.First(u => u.Email == userEmail);
+                    if (!project.Users.Contains(user))
+                    {
+                        project.Users.Add(user);
+                    }
+                }
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(project);
+            return Redirect("/Projects/Details/" + project.Id.ToString());
         }
 
         // GET: Projects/Delete/5
-        [Authorize(Roles="Admin, ProjectManager")] 
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,7 +137,7 @@ namespace FlySwatter.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles="Admin, ProjectManager")] 
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.Projects.Find(id);
