@@ -91,7 +91,7 @@ namespace FlySwatter.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, ProjectManager")]
-        public ActionResult Edit(string Name, List<string> SelectedUsers)
+        public ActionResult Edit(string Name, List<string> SelectedUsers, ICollection<string> su)
         {
             Project project = db.Projects.First(p => p.Name == Name);
             if (SelectedUsers != null)
@@ -99,7 +99,7 @@ namespace FlySwatter.Controllers
                 var usersToRem = new List<string>();
                 foreach (var user in project.Users)
                 {
-                    SelectedUsers.Contains("maggiore");
+                    SelectedUsers.Contains(user.Email.ToString());
                     if (!SelectedUsers.Contains(user.Email))
                     {
                         project.Users.Remove(user);

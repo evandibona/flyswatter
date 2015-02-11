@@ -18,5 +18,12 @@
         <p>
             The page for editing and viewing a project. 
         </p>
+        <h4> Assigned Users: </h4>
+        <ul>
+            @foreach (var user in Model.Users)
+            {
+                <li> @user.Email </li>
+            }
+        </ul>
     </div>
 </div>
