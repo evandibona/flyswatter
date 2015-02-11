@@ -1,23 +1,22 @@
 @import "_colors-elena.scss";
-@import "_icons.scss";
 
 body {
   padding-top: 65px;
   padding-bottom: 1em;
 }
 .navbar-right {
-  margin-right: 0px; 
-} 
+  margin-right: 0px;
+}
 .row {
   ::selection {
     color: $cream;
-    background: $blue; 
+    background: $blue;
   }
   ::-moz-selection {
     color: $cream;
     background: $blue;
   }
   a {
-    color: $teal; 
-  } 
+    color: $teal;
+  }
 }
