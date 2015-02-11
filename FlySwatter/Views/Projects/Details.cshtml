@@ -1,34 +1,22 @@
 ﻿@model FlySwatter.Models.Project
 
 @{
-    ViewBag.Title = "Details | Projects";
+    ViewBag.Title = Model.Name + " | Projects";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>Project</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-    
-        </dl>
+<div class="row">
+    <div class="text-center col-md-12">
+        <h2>@Model.Name</h2>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary", @style = "color: white" })
+        @Html.ActionLink("Add User", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-info", @style = "color: white" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-xs btn-danger", @style = "color: white" })
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+</div>
+<hr />
+<div class="row">
+    <div class="text-center col-md-12">
+        <p>
+            The page for editing and viewing a project. 
+        </p>
+    </div>
+</div>
