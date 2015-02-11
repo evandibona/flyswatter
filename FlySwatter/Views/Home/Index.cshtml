@@ -42,7 +42,7 @@
                         <tr>
                             <td> @ticket.TicketPriority.Name </td>
                             <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
-                            <td> @ticket.Project.Name </td>
+                            <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
                             <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
                             <td> @ticket.Description </td>
                         </tr>
