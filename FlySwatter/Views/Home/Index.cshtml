@@ -14,7 +14,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for..." id="SearchString" name="SearchString" />
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button">Va!</button>
+                        <button class="btn btn-danger" type="button">Search!</button>
                     </span>
                 </div>
             }
@@ -39,13 +39,13 @@
                 <tbody>
                     @foreach (var ticket in Model.Tickets)
                     {
-                        <tr>
-                            <td> @ticket.TicketPriority.Name </td>
-                            <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
-                            <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
-                            <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
-                            <td> @ticket.Description </td>
-                        </tr>
+                    <tr>
+                        <td> @ticket.TicketPriority.Name </td>
+                        <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
+                        <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
+                        <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
+                        <td> @ticket.Description </td>
+                    </tr>
                     }
                 </tbody>
             </table>
