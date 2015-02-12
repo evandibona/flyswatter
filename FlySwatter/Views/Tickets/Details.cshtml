@@ -7,21 +7,22 @@
     emphasis.Add(1, "text-muted"); emphasis.Add(2, "text-warning");
     emphasis.Add(4, "text-danger"); emphasis.Add(3, "text-primary");
 }
-
-<h2>@Html.DisplayFor(model => model.Title)</h2>
-@switch (Model.TicketStatus.Name)
-{
-    case "Completed":
-        <h4 class="btn btn-success">Completed</h4>
-        break;
-    case "In Progress":
-    <h4 class="btn btn-info">In Progress</h4>
-        break;
-    default:
-    <h4 class="btn btn-danger">???</h4>
-        break;
-}
-<h4 class="@emphasis[Model.TicketPriorityId]"> @Html.DisplayFor(model => model.TicketPriority.Name) </h4>
+<div class="inline-title">
+    <h2>@Html.DisplayFor(model => model.Title)</h2>
+    @switch (Model.TicketStatus.Name)
+    {
+        case "Completed":
+            <h4 class="btn btn-success">Completed</h4>
+            break;
+        case "In Progress":
+        <h4 class="btn btn-info">In Progress</h4>
+            break;
+        default:
+        <h4 class="btn btn-danger">???</h4>
+            break;
+    }
+    <h4 class="@emphasis[Model.TicketPriorityId]"> @Html.DisplayFor(model => model.TicketPriority.Name) </h4>
+</div>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id })

@@ -19,3 +19,11 @@ body {
     background: $blue;
   }
 }
+.inline-title {
+  text-align: center; 
+  h4 { 
+    display: inline-block; 
+    margin: 0; 
+    margin-right: 0.5em; 
+  } 
+}
