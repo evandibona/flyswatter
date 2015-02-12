@@ -15,7 +15,7 @@ namespace FlySwatter.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
-        public ActionResult Index(string sortOrder, string searchString, string Owner)
+        public ActionResult Index(string sortOrder, string searchString, string Owner, string Assigned, string Project)
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
             var sortParams = new Dictionary<string,string>();
@@ -29,6 +29,11 @@ namespace FlySwatter.Controllers
                         || t.Project.Name.Contains(searchString) 
                         || t.TicketType.Name.Contains(searchString) 
                     ); 
+            }
+
+            if (!String.IsNullOrEmpty(Owner))
+            {
+                tickets = tickets.Where(t => t.OwnerUser.Email == Owner); 
             }
 
             switch (sortOrder)
