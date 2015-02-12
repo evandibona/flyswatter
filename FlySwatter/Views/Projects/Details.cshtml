@@ -7,23 +7,37 @@
 <div class="row">
     <div class="text-center col-md-12">
         <h2>@Model.Name</h2>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary"})
-        @Html.ActionLink("Add User", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-info"})
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-xs btn-danger"})
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary" })
+        @Html.ActionLink("Add User", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-info" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-xs btn-danger" })
     </div>
 </div>
 <hr />
 <div class="row">
-    <div class="text-center col-md-12">
-        <p>
-            The page for editing and viewing a project. 
-        </p>
+    <div class="text-center col-md-3">
         <h4> Assigned Users: </h4>
-        <ul>
-            @foreach (var user in Model.Users)
-            {
-                <li> @user.Email </li>
-            }
-        </ul>
+        <table class="table">
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr> 
+                        <td>@user.Email</td> 
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <ul></ul>
+    </div>
+    <div class="text-center col-sm-6">
+        <p>
+            The page for editing and viewing a project.
+            In the future this paragraph will be used to 
+            display more detailed information about a project. 
+        </p>
+    </div>
+    <div class="text-center col-sm-3">
+        <div>
+            @Html.ActionLink("Tickets", "Index", "Home", new { Project = Model.Name }, new { @class = "btn btn-default" }) 
+        </div>
     </div>
 </div>
