@@ -27,7 +27,7 @@
             <h4>Tickets</h4>
             <table class="table">
                 <tbody>
-                    @foreach (var ticket in Model.AssignedTickets)
+                    @foreach (var ticket in Model.OwnedTickets)
                     {
                         <tr>
                             <td/> @ticket.Title 

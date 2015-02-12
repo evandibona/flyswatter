@@ -21,6 +21,7 @@ namespace FlySwatter.Models
         public ApplicationUser()
         {
             this.AssignedTickets = new HashSet<Ticket>();
+            this.OwnedTickets = new HashSet<Ticket>();
             this.Projects = new HashSet<Project>();
         }
 
@@ -30,8 +31,7 @@ namespace FlySwatter.Models
 
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<Ticket> AssignedTickets { get; set; }
-
-
+        public virtual ICollection<Ticket> OwnedTickets { get; set; }
     }
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -46,7 +46,6 @@ namespace FlySwatter.Models
         }
 
         public virtual DbSet<Project>               Projects { get; set; }
-        //public virtual DbSet<ProjectUsers>          ProjectUsers { get; set; }
         public virtual DbSet<Ticket>                Tickets { get; set; }
         public virtual DbSet<TicketAttachment>      TicketAttachments { get; set; }
         public virtual DbSet<TicketComment>         TicketComments { get; set; }
