@@ -36,6 +36,16 @@ namespace FlySwatter.Controllers
                 tickets = tickets.Where(t => t.OwnerUser.Email == Owner); 
             }
 
+            if (!String.IsNullOrEmpty(Assigned))
+            {
+                tickets = tickets.Where(t => t.AssignedUser.Email == Assigned); 
+            }
+
+            if (!String.IsNullOrEmpty(Project))
+            {
+                tickets = tickets.Where(t => t.Project.Name == Project); 
+            }
+
             switch (sortOrder)
             {
                 case "title":

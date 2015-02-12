@@ -32,7 +32,9 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         @foreach (var user in Model.Users)
                         {
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@user.Email.ToString()</a></li>
+                            <li role="presentation">
+                                @Html.ActionLink(user.Email, "Index", new { Assigned = user.Email })
+                            </li>
                         }
                     </ul>
                 </div>
@@ -44,7 +46,9 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         @foreach (var project in Model.Projects)
                         {
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@project.Name.ToString()</a></li>
+                            <li role="presentation">
+                                @Html.ActionLink(project.Name, "Index", new { Project = project.Name})
+                            </li>
                         }
                     </ul>
                 </div>
