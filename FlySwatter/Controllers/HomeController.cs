@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FlySwatter.Models;
+using FlySwatter.Helpers;
 
 namespace FlySwatter.Controllers
 {
@@ -20,59 +21,9 @@ namespace FlySwatter.Controllers
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
             var sortParams = new Dictionary<string,string>();
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                searchString = searchString.ToString().Trim();
-                tickets = tickets.Where(t => t.Title.Contains(searchString)
-                        || t.Description.Contains(searchString) 
-                        || t.OwnerUser.Email.Contains(searchString) 
-                        || t.Project.Name.Contains(searchString) 
-                        || t.TicketType.Name.Contains(searchString) 
-                    ); 
-            }
-
-            if (!String.IsNullOrEmpty(Owner))
-            {
-                tickets = tickets.Where(t => t.OwnerUser.Email == Owner); 
-            }
-
-            if (!String.IsNullOrEmpty(Assigned))
-            {
-                tickets = tickets.Where(t => t.AssignedUser.Email == Assigned); 
-            }
-
-            if (!String.IsNullOrEmpty(Project))
-            {
-                tickets = tickets.Where(t => t.Project.Name == Project); 
-            }
-
-            switch (sortOrder)
-            {
-                case "title":
-                    tickets = tickets.OrderBy(t => t.Title);
-                    break; 
-                case "title_desc":
-                    tickets = tickets.OrderByDescending(t => t.Title);
-                    break; 
-                case "created":
-                    tickets = tickets.OrderBy(t => t.Created);
-                    break; 
-                case "created_desc":
-                    tickets = tickets.OrderByDescending(t => t.Created);
-                    break; 
-                case "priority":
-                    tickets = tickets.OrderBy(t => t.TicketPriority.Name);
-                    break; 
-                case "priority_desc":
-                    tickets = tickets.OrderByDescending(t => t.TicketPriority.Name);
-                    break; 
-                case "project":
-                    tickets = tickets.OrderBy(t => t.Project.Name);
-                    break; 
-                default:
-                    tickets = tickets.OrderBy(t => t.Title); 
-                    break;
-            }
+            tickets = tickets.search(searchString); 
+            tickets = tickets.filterBigguns(Owner, Assigned, Project);
+            tickets = tickets.SortColumns(sortOrder); 
 
             var model = new HomeView() { Tickets = tickets.ToList() };
             model.Users = db.Users.ToList(); 
