@@ -14,6 +14,14 @@ namespace FlySwatter.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // GET: Users/Index
+        [Authorize]
+        public ActionResult Index()
+        {
+            var users = db.Users; 
+            return View(users);
+        }
+
         // GET: Users/Roles
         [Authorize(Roles="Admin")]
         public ActionResult Roles()

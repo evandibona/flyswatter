@@ -9,50 +9,11 @@
 {
     <div class="row submitter">
         <div class="col-sm-12">
-            <div class="btn-group">
-                <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        Owner
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" >
-                        @foreach (var user in Model.Users)
-                        {
-                            <li role="presentation">
-                                @Html.ActionLink(user.Email, "Index", new { Owner = user.Email })
-                            </li>
-                        }
-                    </ul>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        Assigned User
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        @foreach (var user in Model.Users)
-                        {
-                            <li role="presentation">
-                                @Html.ActionLink(user.Email, "Index", new { Assigned = user.Email })
-                            </li>
-                        }
-                    </ul>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        Project
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        @foreach (var project in Model.Projects)
-                        {
-                            <li role="presentation">
-                                @Html.ActionLink(project.Name, "Index", new { Project = project.Name})
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
+            <a href="/Users" class="btn btn-danger">Users</a>
+        </div>
+    </div>
+    <div class="row submitter">
+        <div class="col-sm-12">
             <table class="table table-striped">
                 <thead>
                     <tr>

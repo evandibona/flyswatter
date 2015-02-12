@@ -1,0 +1,13 @@
+﻿@model IEnumerable<FlySwatter.Models.ApplicationUser>
+
+@{
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        @foreach (var user in Model)
+        {
+            <p> @user.Email </p>
+        }
+    </div>
+</div>
