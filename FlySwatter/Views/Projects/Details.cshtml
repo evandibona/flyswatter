@@ -21,7 +21,8 @@
                 @foreach (var user in Model.Users)
                 {
                     <tr> 
-                        <td>@user.Email</td> 
+                        <td>@Html.ActionLink(user.Email, "Details", "Users", new { email = user.Email })</td> 
+                        <td><a href="/Users/Details/?email=@user.Email">@user.Email</a></td>
                     </tr>
                 }
             </tbody>

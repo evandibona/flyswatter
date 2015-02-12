@@ -73,16 +73,14 @@ namespace FlySwatter.Controllers
             return RedirectToAction("Roles");
         }
 
-
-        /*
         // GET: Users/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.Users.Find(id);
+            ApplicationUser applicationUser = db.Users.First(u => u.Email == email); 
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -90,6 +88,7 @@ namespace FlySwatter.Controllers
             return View(applicationUser);
         }
 
+        /*
         // GET: Users/Create
         public ActionResult Create()
         {
