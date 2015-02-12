@@ -91,26 +91,35 @@ namespace FlySwatter.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, ProjectManager")]
-        public ActionResult Edit(string Name, List<string> SelectedUsers, ICollection<string> su)
+        public ActionResult Edit(string Name, List<string> SelectedUsers)
         {
             Project project = db.Projects.First(p => p.Name == Name);
             if (SelectedUsers != null)
             {
-                var usersToRem = new List<string>();
-                foreach (var user in project.Users)
+                var pusers = project.Users.ToList();
+                foreach (var suser in SelectedUsers)
                 {
-                    SelectedUsers.Contains(user.Email.ToString());
-                    if (!SelectedUsers.Contains(user.Email))
+                    bool projectContainsSelected = project.Users.Any(u => u.Id == suser); 
+                    if (projectContainsSelected) 
                     {
-                        project.Users.Remove(user);
+                        // Do nothing
+                    }
+                    if (!projectContainsSelected)
+                    {
+                        var uToAdd = db.Users.First(u => u.Id == suser);
+                        project.Users.Add(uToAdd); 
                     }
                 }
-                foreach (var userEmail in SelectedUsers)
+                foreach (var puser in pusers)
                 {
-                    var user = db.Users.First(u => u.Email == userEmail);
-                    if (!project.Users.Contains(user))
+                    bool selectedContainsPuser = SelectedUsers.Any(uid => uid == puser.Id);
+                    if (selectedContainsPuser)
                     {
-                        project.Users.Add(user);
+                        // Do nothing
+                    }
+                    if (!selectedContainsPuser)
+                    {
+                        project.Users.Remove(puser); 
                     }
                 }
                 db.SaveChanges();
