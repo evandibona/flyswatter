@@ -1,0 +1,31 @@
+.btn-success {
+  color: #ffffff;
+    background-color: #22b24c;
+      border-color: #22b24c;
+      }
+      .btn-success:hover,
+      .btn-success:focus,
+      .btn-success.focus,
+      .btn-success:active,
+      .btn-success.active,
+      .open > .dropdown-toggle.btn-success {
+        color: #ffffff;
+	  background-color: #1a873a;
+	    border-color: #187f36;
+	    }
+
+.btn-indigo {
+  color: white; 
+  background-color: $indigo; 
+  border-color: $white; 
+} 
+.btn-blue {
+  color: white; 
+  background-color: $blue; 
+  border-color: $teal; 
+} 
+.btn-sunny {
+  color: white; 
+  background-color: $sunny; 
+  border-color: $orange; 
+} 

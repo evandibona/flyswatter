@@ -1,26 +1,4 @@
-.btn-danger {
-  background: $red;
-  &:hover {
-    background: mix($red, black, 90%);
-  }
-}
 $navColor: $teal; 
-.navbar {
-  background: $navColor;
-  a {
-    color: white; 
-  } 
-}
-.navbar-default {
-  .navbar-nav > li > a {
-    color: white; 
-    &:hover { color: $white; background: darken($navColor, 6%); } 
-  }
-  .navbar-brand {
-    color: white; 
-    &:hover { color: $white; background: darken($navColor, 6%); } 
-  } 
-} 
 .row {
   ::selection {
     color: $blue;
@@ -32,14 +10,5 @@ $navColor: $teal;
   }
 }
 ////////////////////////////////
-#login { background: $purple; color: white }
-#register-a { border-color: $purple; }
-#login-status {
-  a {color: $teal;}
-}
-#register { background: $teal; color: white; }
-.row {
-  .projects { a { border-color: $orange } }
-  .roles { a { border-color: $red } }
-  .tickets { a { border-color: $indigo } }
-}
+.btn { color: white }; 
+table { a { color: $teal } }; 

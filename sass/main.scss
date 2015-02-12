@@ -1,4 +1,6 @@
 @import "_colors-elena.scss";
+@import "_color-me-anything.scss"; 
+@import "_theme-extend.scss"; 
 
 body {
   padding-top: 65px;
@@ -15,8 +17,5 @@ body {
   ::-moz-selection {
     color: $cream;
     background: $blue;
-  }
-  a {
-    color: $teal;
   }
 }
