@@ -76,16 +76,23 @@ namespace FlySwatter.Controllers
         // GET: Users/Details/5
         public ActionResult Details(string email)
         {
-            if (email == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationUser applicationUser = db.Users.First(u => u.Email == email); 
-            if (applicationUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(applicationUser);
+                if (email == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            ApplicationUser user = db.Users.First(u => u.Email == email); 
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+            var uid = user.Id;
+            var aTickets = db.Tickets.Count(t => t.AssignedUserId == uid); 
+            var oTickets = db.Tickets.Count(t => t.OwnerUserId == uid);
+            var tcount = aTickets + oTickets; 
+            var userview = new UserDetailsView()
+                    { Id = user.Id, TicketCount = tcount, 
+                    FirstName = user.FirstName, LastName = user.LastName, Email = user.Email }; 
+            return View(userview);
         }
 
         /*

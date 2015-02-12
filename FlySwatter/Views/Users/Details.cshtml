@@ -1,4 +1,4 @@
-﻿@model FlySwatter.Models.ApplicationUser
+﻿@model FlySwatter.Models.UserDetailsView 
 
 @{
     ViewBag.Title = "Users | Flyswatter";
@@ -11,10 +11,10 @@
         <div class="col-md-4">
             <dl class="dl-horizontal">
                 <dt/> Email
-                <dd/> @Html.DisplayFor(model => model.Email)
+                <dd/> @Html.DisplayFor(m => m.Email) 
 
-                <dt/> Dummy 
-                <dd/> Who is? 
+                <dt/> Tickets
+                <dd/> @Model.TicketCount 
 
                 <dt/> Favorite Color
                 <dd/> Blue
@@ -22,19 +22,6 @@
         </div>
         <div class="col-sm-2">
             <p>All sorts of fascinating information about this user. Actually this box probably won't exist soon. </p>
-        </div>
-        <div class="col-sm-2">
-            <h4>Tickets</h4>
-            <table class="table">
-                <tbody>
-                    @foreach (var ticket in Model.OwnedTickets)
-                    {
-                        <tr>
-                            <td/> @ticket.Title 
-                        </tr>
-                    }
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
