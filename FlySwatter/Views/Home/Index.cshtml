@@ -2,6 +2,7 @@
 @using FlySwatter.Models;
 @{
     ViewBag.Title = "Home";
+    var color = new string[] { "", "cool", "lukewarm", "warmwarm", "hot" }; 
 }
 
 <!-- This page should not even be shown unless the user is authenticated. -->
@@ -38,7 +39,7 @@
                     @foreach (var ticket in Model.Tickets)
                     {
                         <tr>
-                            <td> @ticket.TicketPriority.Name </td>
+                            <td class="@color[ticket.TicketPriorityId]"> @ticket.TicketPriority.Name </td>
                             <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
                             <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
                             <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
