@@ -9,8 +9,6 @@
 {
     <div class="row submitter">
         <div class="col-sm-12">
-            @using (Html.BeginForm())
-            {
                 <div class="btn-group">
                     <div class="btn-group">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -20,7 +18,9 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             @foreach (var user in Model.Users)
                             {
-                            <li role="presentation"><a role="menuitem" tabindex="-1" id="owner" name="owner">@user.Email.ToString()</a></li>
+                                <li role="presentation">
+                                    @Html.ActionLink(user.Email.ToString(), "Index", "Home", new {@role="menuitem", @tabindex="-1", @id="Owner"}) 
+                                </li>
                             }
                         </ul>
                     </div>
@@ -32,7 +32,7 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             @foreach (var user in Model.Users)
                             {
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@user.Email.ToString()</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@user.Email.ToString()</a></li>
                             }
                         </ul>
                     </div>
@@ -44,12 +44,11 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             @foreach (var project in Model.Projects)
                             {
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@project.Name.ToString()</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@project.Name.ToString()</a></li>
                             }
                         </ul>
                     </div>
                 </div>
-            }
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -84,7 +83,7 @@
             @using (Html.BeginForm())
             {
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." id="searchString" name="searchString" />
+                    <input type="text" class="form-control" placeholder="Search for..." name="sesrchString"/>
                     <span class="input-group-btn">
                         <button class="btn btn-danger" type="button">Search!</button>
                     </span>

@@ -15,7 +15,7 @@ namespace FlySwatter.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string Owner)
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
             var sortParams = new Dictionary<string,string>();
