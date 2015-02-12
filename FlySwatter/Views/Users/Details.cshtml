@@ -5,19 +5,39 @@
 }
 
 <div>
-    <h4>ApplicationUser</h4>
+    <h2 class="text-capitalize text-center">Your Name</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt/> Email
+                <dd/> @Html.DisplayFor(model => model.Email)
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
+                <dt/> Dummy 
+                <dd/> Who is? 
+
+                <dt/> Favorite Color
+                <dd/> Blue
+            </dl>
+        </div>
+        <div class="col-sm-2">
+            <p>All sorts of fascinating information about this user. Actually this box probably won't exist soon. </p>
+        </div>
+        <div class="col-sm-2">
+            <h4>Tickets</h4>
+            <table class="table">
+                <tbody>
+                    @foreach (var ticket in Model.AssignedTickets)
+                    {
+                        <tr>
+                            <td/> @ticket.Title 
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
 </p>
