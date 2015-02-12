@@ -26,5 +26,7 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | 
+    <a href="/?Assigned=@Model.Email">Assigned Tickets</a>  | 
+    <a href="/?Owned=@Model.Email">Owned Tickets</a>
 </p>
