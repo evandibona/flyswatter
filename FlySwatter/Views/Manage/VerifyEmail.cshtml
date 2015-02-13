@@ -5,9 +5,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@if (Model.EmailWasSent)
-{
-    using (Html.BeginForm("VerifyEmail", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("VerifyEmail", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.Hidden("email", @Model.Email)
@@ -27,13 +25,6 @@
             </div>
         </div>
     }
-}
-@if (!Model.EmailWasSent)
-{
-    <h4>Email Sent!</h4>
-    <p> To this address: <span class="text-info">@Model.Email</span></p>
-    <p> You can expect an email to arrive soon. If it doesn't appear in a minute or two give us call or email.</p> 
-}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

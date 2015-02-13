@@ -64,6 +64,7 @@ namespace FlySwatter.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ConfirmEmailSuccess? "Your email address has been confirmed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -168,11 +169,12 @@ namespace FlySwatter.Controllers
         // GET: /Manage/SetupEmail 
         public ActionResult SendEmail(VerifyEmailViewModel model)
         {
-            var fromAddress = new MailAddress("evandibona@gmail.com", "From Name");
-            var toAddress = new MailAddress("evandibona@gmail.com", "To Name");
+            var fromAddress = new MailAddress("evandibona@gmail.com", "FlySwatter");
+            var toAddress = new MailAddress("evandibona@gmail.com", "User");
+            string code = UserManager.GenerateEmailConfirmationToken(User.Identity.GetUserId());
             const string fromPassword = "purple0Pop";
-            const string subject = "Confirm Your Email Fool!";
-            const string body = "I have the head of a lion and the body of a snowman. ";
+            const string subject = "Here's the information you need to confirm you password, if that interests you, but it's not really that impor...";
+            string body = "Your Code:   \n\n" + code;
 
             var smtp = new SmtpClient
             {
@@ -192,14 +194,14 @@ namespace FlySwatter.Controllers
                 smtp.Send(message);
             }
             //Send the email. 
-            return View(model);
+            return RedirectToAction("VerifyEmail", new { email = model.Email });
         }
 
         //
         // GET: /Manage/VerifyEmail 
-        public async Task<ActionResult> VerifyEmail(string email)
+        public ActionResult VerifyEmail(string email)
         {
-            var model = new VerifyEmailViewModel() { Email = email, EmailWasSent = false };
+            var model = new VerifyEmailViewModel() { Email = email };
             return View(model);
         }
 
@@ -210,8 +212,17 @@ namespace FlySwatter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyEmail(VerifyEmailViewModel model)
         {
-            // placeholder. 
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), "Jarvis");
+            if (ModelState.IsValid)
+            {
+                // Attempt to confirm. 
+                IdentityResult result = await UserManager.ConfirmEmailAsync(User.Identity.GetUserId(), model.ConfirmCode);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", new { Message = ManageMessageId.ConfirmEmailSuccess});
+                }
+            }
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "Failed to verify Email");
             return View(model);
         }
 
@@ -430,6 +441,7 @@ namespace FlySwatter.Controllers
         {
             AddPhoneSuccess,
             ChangePasswordSuccess,
+            ConfirmEmailSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
