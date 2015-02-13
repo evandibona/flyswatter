@@ -8,6 +8,7 @@ namespace FlySwatter.Models
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
+        public string Email { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
@@ -76,6 +77,20 @@ namespace FlySwatter.Models
         [Phone]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+    }
+
+    public class VerifyEmailViewModel
+    {
+        [Required]
+        [Display(Name = "Code")]
+        public string ConfirmCode { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        public bool EmailWasSent { get; set; }
     }
 
     public class ConfigureTwoFactorViewModel

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +7,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Net;
+using System.Net.Mail;
 using FlySwatter.Models;
 
 namespace FlySwatter.Controllers
@@ -32,9 +35,9 @@ namespace FlySwatter.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -68,9 +71,10 @@ namespace FlySwatter.Controllers
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                Email = await UserManager.GetEmailAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
             };
             return View(model);
         }
@@ -158,6 +162,57 @@ namespace FlySwatter.Controllers
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
             return RedirectToAction("Index", "Manage");
+        }
+
+        //
+        // GET: /Manage/SetupEmail 
+        public ActionResult SendEmail(VerifyEmailViewModel model)
+        {
+            var fromAddress = new MailAddress("evandibona@gmail.com", "From Name");
+            var toAddress = new MailAddress("evandibona@gmail.com", "To Name");
+            const string fromPassword = "purple0Pop";
+            const string subject = "Confirm Your Email Fool!";
+            const string body = "I have the head of a lion and the body of a snowman. ";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
+            }
+            //Send the email. 
+            return View(model);
+        }
+
+        //
+        // GET: /Manage/VerifyEmail 
+        public async Task<ActionResult> VerifyEmail(string email)
+        {
+            var model = new VerifyEmailViewModel() { Email = email, EmailWasSent = false };
+            return View(model);
+        }
+
+
+        //
+        // POST: /Manage/VerifyEmail
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifyEmail(VerifyEmailViewModel model)
+        {
+            // placeholder. 
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), "Jarvis");
+            return View(model);
         }
 
         //
@@ -331,7 +386,7 @@ namespace FlySwatter.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -382,6 +437,6 @@ namespace FlySwatter.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

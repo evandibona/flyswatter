@@ -33,5 +33,9 @@
             @Model.Logins.Count [
             @Html.ActionLink("Manage", "ManageLogins") ]
         </dd>
+        <dt>Confirm Email:</dt>
+        <dd>
+            @Html.ActionLink(Model.Email, "SendEmail", new { email = Model.Email})
+        </dd>
     </dl>
 </div>

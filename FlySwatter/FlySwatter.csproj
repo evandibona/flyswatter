@@ -275,6 +275,8 @@
     <Content Include="Views\Tickets\Edit.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Manage\VerifyEmail.cshtml" />
+    <Content Include="Views\Manage\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

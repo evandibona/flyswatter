@@ -1,0 +1,40 @@
+﻿@model FlySwatter.Models.VerifyEmailViewModel
+@{
+    ViewBag.Title = "Email Verify";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model.EmailWasSent)
+{
+    using (Html.BeginForm("VerifyEmail", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("email", @Model.Email)
+        <h4>Enter verification code</h4>
+        <h5>@ViewBag.Status</h5>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmCode, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ConfirmCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+        </div>
+    }
+}
+@if (!Model.EmailWasSent)
+{
+    <h4>Email Sent!</h4>
+    <p> To this address: <span class="text-info">@Model.Email</span></p>
+    <p> You can expect an email to arrive soon. If it doesn't appear in a minute or two give us call or email.</p> 
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
