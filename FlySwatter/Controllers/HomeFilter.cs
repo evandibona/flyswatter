@@ -61,7 +61,7 @@ namespace FlySwatter.Helpers
                     tickets = tickets.OrderByDescending(t => t.Created);
                     break; 
                 case "priority":
-                    tickets = tickets.OrderBy(t => t.TicketPriority.Name);
+                    tickets = tickets.OrderBy(t => t.TicketPriority.Id);
                     break; 
                 case "priority_desc":
                     tickets = tickets.OrderByDescending(t => t.TicketPriority.Name);

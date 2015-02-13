@@ -9,7 +9,7 @@
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     <div class="row submitter">
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="padding-bottom: 5px; ">
             <a href="/Users" class="btn btn-warning">List of Users</a>
             <a href="/" class="btn btn-default">Reset</a>
             <a href="/Tickets/Create" class="btn btn-indigo">New Ticket</a>
@@ -17,6 +17,15 @@
     </div>
     <div class="row submitter">
         <div class="col-sm-12">
+            @using (Html.BeginForm())
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." name="searchString" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="submit">Search!</button>
+                    </span>
+                </div>
+            }
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -52,15 +61,6 @@
                     }
                 </tbody>
             </table>
-            @using (Html.BeginForm())
-            {
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." name="searchString" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger" type="submit">Search!</button>
-                    </span>
-                </div>
-            }
         </div>
     </div>
     <div class="row" style="height: 10em"></div>
