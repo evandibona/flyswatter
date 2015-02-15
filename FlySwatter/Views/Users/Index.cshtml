@@ -1,14 +1,35 @@
 ﻿@model IEnumerable<FlySwatter.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Users | Flyswatter"; 
+    ViewBag.Title = "Users | Flyswatter";
 }
 
 <div class="row">
-    <div class="col-sm-12">
-        @foreach (var user in Model)
-        {
-            <p> @user.Email </p>
-        }
+    <div class="col-sm-2 btn-group-vertical">
+        <a class="btn btn-warning">Edit Roles</a>
+        <a class="btn btn-blue">Delete A User</a>
+    </div>
+    <div class="col-sm-10">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Tickets</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    var tickets = user.AssignedTickets.ToArray().Length + user.OwnedTickets.ToArray().Length;
+
+                    <tr>
+                        <td>
+                            @Html.ActionLink(user.Email, "Details", new { Email = user.Email }) 
+                        </td>
+                        <td>@tickets</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
