@@ -78,18 +78,36 @@ namespace FlySwatter.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                FirstName = user.FirstName, 
-                LastName = user.LastName, 
             };
             return View(model);
         }
 
         //
-        // POST: /Manage/Index
-        [HttpPost] 
-        public async Task<ActionResult> Index(string UserEmail, string FirstName)
+        // GET: /Manage/ProfileEdit 
+        public ActionResult ProfileEdit()
         {
-            var user = await UserManager.FindByEmailAsync(UserEmail); 
+            var uid = User.Identity.GetUserId(); 
+            var user = UserManager.FindById(uid);
+            var model = new ProfileViewModel() { 
+                Email = user.Email, 
+                Id = user.Id, 
+                FirstName = user.FirstName, 
+                LastName = user.LastName,
+                //UserManager.Update(); 
+            }; 
+            return View(model); 
+        }
+
+        //
+        // POST: /Manage/ProfileEdit 
+        [HttpPost]
+        public ActionResult ProfileEdit(ProfileViewModel model)
+        {
+            var user = UserManager.FindById(model.Id);
+            user.FirstName = model.FirstName; 
+            user.LastName = model.LastName;
+            UserManager.Update(user); 
+            db.SaveChanges(); 
             return View(); 
         }
 

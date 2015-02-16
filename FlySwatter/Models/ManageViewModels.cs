@@ -5,6 +5,13 @@ using Microsoft.Owin.Security;
 
 namespace FlySwatter.Models
 {
+    public class ProfileViewModel
+    {
+        public string Email { get; set; }
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
@@ -13,8 +20,6 @@ namespace FlySwatter.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 
     public class ManageLoginsViewModel

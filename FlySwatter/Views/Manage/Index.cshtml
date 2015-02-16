@@ -22,29 +22,7 @@
                 @Html.ActionLink("Create", "SetPassword", null, new { @class = "btn btn-danger btn-sm" })
             }
             @Html.ActionLink(Model.Email, "SendEmail", new { email = Model.Email }, new { @class = "btn btn-info btn-sm" })
+            @Html.ActionLink("Edit Profile", "ProfileEdit", new { email = Model.Email }, new { @class = "btn btn-warning btn-sm" })
         </div>
-    </div>
-</div>
-<div class="row text-center">
-    <div class="col-sm-12">
-        <h2>Profile</h2>
-    </div>
-</div>
-<div class="row text-center">
-    <div class="col-sm-12">
-        <hr />
-        @using (Html.BeginForm())
-        {
-            <div class="form-horizontal">
-                @Html.Hidden("UserEmail", Model.Email)
-                <h4>First Name</h4>
-                @Html.TextBox("FirstName", Model.FirstName)
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        }
     </div>
 </div>

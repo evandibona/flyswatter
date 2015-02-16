@@ -277,6 +277,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Manage\VerifyEmail.cshtml" />
     <Content Include="Views\Manage\SendEmail.cshtml" />
+    <Content Include="Views\Manage\ProfileEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
