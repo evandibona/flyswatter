@@ -108,7 +108,7 @@ namespace FlySwatter.Controllers
             user.LastName = model.LastName;
             UserManager.Update(user); 
             db.SaveChanges(); 
-            return View(); 
+            return Redirect("/Manage/Index"); 
         }
 
         //
