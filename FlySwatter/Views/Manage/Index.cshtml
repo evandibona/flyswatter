@@ -36,6 +36,7 @@
         @using (Html.BeginForm())
         {
             <div class="form-horizontal">
+                @Html.Hidden("UserEmail", Model.Email)
                 <h4>First Name</h4>
                 @Html.TextBox("FirstName", Model.FirstName)
             </div>

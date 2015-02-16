@@ -86,9 +86,10 @@ namespace FlySwatter.Controllers
 
         //
         // POST: /Manage/Index
-        public ActionResult Index(string FirstName)
+        [HttpPost] 
+        public async Task<ActionResult> Index(string UserEmail, string FirstName)
         {
-            var a = FirstName; 
+            var user = await UserManager.FindByEmailAsync(UserEmail); 
             return View(); 
         }
 
