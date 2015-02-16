@@ -18,7 +18,7 @@ namespace FlySwatter.Controllers
         public ActionResult Index()
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(tickets.ToList());
+            return RedirectToActionPermanent("Index", "Home");
         }
 
         // GET: Tickets/Details/5
