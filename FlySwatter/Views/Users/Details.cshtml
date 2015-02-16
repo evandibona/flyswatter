@@ -2,10 +2,11 @@
 
 @{
     ViewBag.Title = "Users | Flyswatter";
+    var fullname = Model.FirstName + " " + Model.LastName; 
 }
 
 <div>
-    <h2 class="text-capitalize text-center">Your Name</h2>
+    <h2 class="text-capitalize text-center">@Model.FirstName</h2>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -26,7 +27,6 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | 
     <a href="/?Assigned=@Model.Email">Assigned Tickets</a>  | 
     <a href="/?Owned=@Model.Email">Owned Tickets</a>
 </p>

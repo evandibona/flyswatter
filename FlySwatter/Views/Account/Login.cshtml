@@ -5,8 +5,13 @@
 }
 
 <div class="row text-center">
-    <div class="col-md-12" >
-        <img src="~/Content/logo.png" />
+    <div class="col-md-12">
+        <div id="logo-header">
+            <div id="logo-text">
+                <h1>Flyswatter</h1>
+                <h4>Bug Tracker</h4>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
@@ -55,17 +60,14 @@
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
                     </p>*@
             }
-        </section>
-    </div>
-    <div class="col-md-3">
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        <input type="submit" value="Admin" class="btn btn-success" />
+                    </div>
+                </div>
+            }
         </section>
     </div>
     <div class="col-md-3">

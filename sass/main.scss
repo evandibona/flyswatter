@@ -27,3 +27,24 @@ body {
     margin-right: 0.5em; 
   } 
 }
+#logo-header {
+  background-image: url("/Content/logo.png"); 
+  background-size: 16em; 
+  height: 22em; 
+  width: 25em; 
+  margin: 0 auto; 
+  background-position: 1em 5%; 
+  background-repeat: no-repeat; 
+  margin-botton: 10em; 
+  #logo-text {
+    position: relative; 
+    top: 6em; 
+    left: 3em; 
+    h1 {
+      color: #666; 
+    } 
+    h4 {
+      color: #aaa; 
+    } 
+  }
+} 

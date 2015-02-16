@@ -18,6 +18,7 @@ namespace FlySwatter.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -68,6 +69,7 @@ namespace FlySwatter.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = db.Users.First( u => u.Id == userId); 
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -76,8 +78,18 @@ namespace FlySwatter.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                FirstName = user.FirstName, 
+                LastName = user.LastName, 
             };
             return View(model);
+        }
+
+        //
+        // POST: /Manage/Index
+        public ActionResult Index(string FirstName)
+        {
+            var a = FirstName; 
+            return View(); 
         }
 
         //
