@@ -17,13 +17,13 @@ namespace FlySwatter.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
-        public ActionResult Index(string sortOrder, string searchString, string Owner, string Assigned, string Project, int? page)
+        public ActionResult Index(string sortOrder, string searchString, string Owned, string Assigned, string Project, int? page)
         {
             var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
             var sortParams = new Dictionary<string,string>();
 
             tickets = tickets.search(searchString); 
-            tickets = tickets.filterBigguns(Owner, Assigned, Project);
+            tickets = tickets.filterBigguns(Owned, Assigned, Project);
             tickets = tickets.SortColumns(sortOrder);
 
             if (page == null)
