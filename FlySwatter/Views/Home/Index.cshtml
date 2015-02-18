@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Home";
     var color = new string[] { "", "cool", "lukewarm", "warmwarm", "hot" };
+    var currentPage = Model.Tickets.PageNumber;
+    var pages = Model.Tickets.PageCount; 
 }
 
 <!-- This page should not even be shown unless the user is authenticated. -->
@@ -18,7 +20,7 @@
     </div>
     <div class="row submitter">
         <div class="col-sm-12">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for..." name="searchString" />
@@ -75,10 +77,9 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            @{var pages = 10;}
             @for (int i = 1; i <= pages; i++)
             {
-                <li><a href="#">@i</a></li>
+                <li>@Html.ActionLink(i.ToString(), "Index", new { page = i }) </li>
             }
             <li>
                 <a href="#" aria-label="Next">

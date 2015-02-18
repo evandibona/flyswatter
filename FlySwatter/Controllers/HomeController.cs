@@ -35,7 +35,8 @@ namespace FlySwatter.Controllers
                 int pageNumber = (int)page;
             }
 
-            var model = new HomeView() { Tickets = tickets.ToList() };
+            var pageSize = 5; 
+            var model = new HomeView() { Tickets = tickets.ToPagedList((int)page, pageSize) };
             model.Users = db.Users.ToList(); 
             model.Projects = db.Projects.ToList(); 
             return View(model);
