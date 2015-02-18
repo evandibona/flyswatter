@@ -2,7 +2,7 @@
 @using FlySwatter.Models;
 @{
     ViewBag.Title = "Home";
-    var color = new string[] { "", "cool", "lukewarm", "warmwarm", "hot" }; 
+    var color = new string[] { "", "cool", "lukewarm", "warmwarm", "hot" };
 }
 
 <!-- This page should not even be shown unless the user is authenticated. -->
@@ -64,5 +64,23 @@
             </table>
         </div>
     </div>
-    <div class="row" style="height: 10em"></div>
+    <nav>
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @{var pages = 10;}
+            @for (int i = 1; i <= pages; i++)
+            {
+                <li><a href="#">@i</a></li>
+            }
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 }
