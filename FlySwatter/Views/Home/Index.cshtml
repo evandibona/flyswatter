@@ -40,7 +40,10 @@
                             @Html.ActionLink("Project", "Index", new { sortOrder = "project" })
                         </th>
                         <th>
-                            @Html.ActionLink("Description", "Index", new { sortOrder = "owner"})
+                            @Html.ActionLink("Owner", "Index", new { sortOrder = "owned"})
+                        </th>
+                        <th>
+                            @Html.ActionLink("Assigned", "Index", new { sortOrder = "assigned"})
                         </th>
                         <th>
                             @Html.ActionLink("Created", "Index", new { sortOrder = "created" })
@@ -56,6 +59,7 @@
                             <td> <a href="/Tickets/Details/@ticket.Id">@ticket.Title</a></td>
                             <td> <a href="/Projects/Details/@ticket.Project.Id">@ticket.Project.Name</a> </td>
                             <td> <a href="/Users/Details/?email=@ticket.OwnerUser.Email">@ticket.OwnerUser.Email</a></td>
+                            <td> <a href="/Users/Details/?email=@ticket.AssignedUser.Email">@ticket.AssignedUser.Email</a></td>
                             <td> @ticket.Created.Date.ToString().Split(' ')[0]</td>
                             <td> @ticket.Description </td>
                         </tr>

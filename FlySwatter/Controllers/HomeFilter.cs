@@ -12,11 +12,11 @@ namespace FlySwatter.Helpers
 {
     public static class TicketFilters 
     {
-        public static IQueryable<Ticket> filterBigguns(this IQueryable<Ticket> tickets, string owner, string assigned, string project)
+        public static IQueryable<Ticket> filterBigguns(this IQueryable<Ticket> tickets, string owned, string assigned, string project)
         {
-            if (!String.IsNullOrEmpty(owner))
+            if (!String.IsNullOrEmpty(owned))
             {
-                tickets = tickets.Where(t => t.OwnerUser.Email == owner); 
+                tickets = tickets.Where(t => t.OwnerUser.Email == owned); 
             }
 
             if (!String.IsNullOrEmpty(assigned))
@@ -69,17 +69,17 @@ namespace FlySwatter.Helpers
                 case "project":
                     tickets = tickets.OrderBy(t => t.Project.Name);
                     break; 
-                case "owner":
-                    tickets = tickets.OrderBy(t => t.OwnerUser);
+                case "owned":
+                    tickets = tickets.OrderBy(t => t.OwnerUser.Email);
                     break; 
-                case "owner_desc":
-                    tickets = tickets.OrderByDescending(t => t.OwnerUser);
+                case "owned_desc":
+                    tickets = tickets.OrderByDescending(t => t.OwnerUser.Email);
                     break; 
                 case "assigned":
-                    tickets = tickets.OrderBy(t => t.AssignedUser);
+                    tickets = tickets.OrderBy(t => t.AssignedUser.Email);
                     break; 
                 case "assigned_desc":
-                    tickets = tickets.OrderByDescending(t => t.AssignedUser);
+                    tickets = tickets.OrderByDescending(t => t.AssignedUser.Email);
                     break; 
                 default:
                     tickets = tickets.OrderBy(t => t.Title); 
