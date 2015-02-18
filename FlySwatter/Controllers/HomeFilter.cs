@@ -69,6 +69,18 @@ namespace FlySwatter.Helpers
                 case "project":
                     tickets = tickets.OrderBy(t => t.Project.Name);
                     break; 
+                case "owner":
+                    tickets = tickets.OrderBy(t => t.OwnerUser);
+                    break; 
+                case "owner_desc":
+                    tickets = tickets.OrderByDescending(t => t.OwnerUser);
+                    break; 
+                case "assigned":
+                    tickets = tickets.OrderBy(t => t.AssignedUser);
+                    break; 
+                case "assigned_desc":
+                    tickets = tickets.OrderByDescending(t => t.AssignedUser);
+                    break; 
                 default:
                     tickets = tickets.OrderBy(t => t.Title); 
                     break;
