@@ -4,20 +4,26 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Web;
 using System.Web.Mvc;
 using FlySwatter.Models;
+
 
 namespace FlySwatter.Controllers
 {
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ManageController mc = new ManageController(); 
 
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketStatus).Include(t => t.TicketType);
+            var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project)
+                .Include(t => t.TicketStatus).Include(t => t.TicketType).Include(t => t.TicketComments);
             return RedirectToActionPermanent("Index", "Home");
         }
 
@@ -34,6 +40,25 @@ namespace FlySwatter.Controllers
                 return HttpNotFound();
             }
             return View(ticket);
+        }
+
+        // POST: Tickets/Details/5
+        [HttpPost]
+        public ActionResult Details(string commentBody, Ticket ticket)
+        {
+            var date = DateTimeOffset.UtcNow;
+            var authorId = User.Identity.GetUserId();
+            var ticketId = ticket.Id;
+            var comment = new TicketComment()
+            {
+                Created = date,
+                TicketId = ticketId,
+                UserId = authorId,
+                Comment = commentBody
+            };
+            db.TicketComments.Add(comment);
+            db.SaveChanges();
+            return RedirectToAction("Details", "Tickets", new { id = ticketId }); 
         }
 
         // GET: Tickets/Create
