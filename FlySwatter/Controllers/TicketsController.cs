@@ -22,19 +22,19 @@ namespace FlySwatter.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(t => t.AssignedUser).Include(t => t.OwnerUser).Include(t => t.Project)
-                .Include(t => t.TicketStatus).Include(t => t.TicketType).Include(t => t.TicketComments);
+            var tickets = db.Tickets; 
             return RedirectToActionPermanent("Index", "Home");
         }
 
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
         {
+            var tickets = db.Tickets.Include(t => t.TicketComments);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
+            Ticket ticket = tickets.First(t => t.Id == id); 
             if (ticket == null)
             {
                 return HttpNotFound();
