@@ -27,6 +27,7 @@ namespace FlySwatter.Controllers
         }
 
         // GET: Tickets/Details/5
+        [Authorize] 
         public ActionResult Details(int? id)
         {
             var tickets = db.Tickets.Include(t => t.TicketComments);

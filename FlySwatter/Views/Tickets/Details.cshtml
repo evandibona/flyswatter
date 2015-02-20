@@ -85,24 +85,32 @@
     <p> @Model.Description </p>
 }
 
+<hr />
 <div class="row">
-    <div class="col-sm-12">
-        @using (Html.BeginForm("Details", "Tickets", FormMethod.Post))
-        {
-            Html.HiddenFor(m => m.Id); 
-            <textarea name="commentBody"></textarea>
-            <input type="submit" value="Blammo!" name="submit" />
-        }
+    <div class="col-sm-2">
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-        @foreach (var comment in Model.TicketComments)
-        {
-            <h4>@comment.User.FirstName</h4>
-            <i>@comment.Created.Date</i>
-            <p>@comment.Comment</p>
-        }
+    <div class="col-sm-8">
+        <div class="text-center comment-form">
+            @using (Html.BeginForm("Details", "Tickets", FormMethod.Post))
+            {
+                Html.HiddenFor(m => m.Id);
+                <textarea name="commentBody"></textarea>
+                <div class="row">
+                    <input type="submit" value="Blammo!" name="submit" />
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @foreach (var comment in Model.TicketComments)
+                {
+                    <h4>@comment.User.FirstName</h4>
+                    <i>@comment.Created.Date</i>
+                    <p>@comment.Comment</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
     </div>
 </div>
