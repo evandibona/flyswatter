@@ -27,57 +27,71 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
 </p>
-<div>
+<div class="row">
     <hr />
-    <dl class="dl-horizontal">
+    <div class="col-sm-4">
+        <div>
+            <dl class="dl-horizontal">
 
-        <dt>
-            User(s) Assigned
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AssignedUser.Email)
-        </dd>
+                <dt>
+                    User(s) Assigned
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AssignedUser.Email)
+                </dd>
 
-        <dt>
-            Owner
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.OwnerUser.Email)
-        </dd>
+                <dt>
+                    Owner
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.OwnerUser.Email)
+                </dd>
 
-        <dt>
-            Project
-        </dt>
+                <dt>
+                    Project
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Project.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketType.Name)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TicketType.Name)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
 
-        @if (Model.Updated.HasValue)
-        {
-            <dt> Updated </dt>
-            <dd> @Model.Updated.Value </dd>
-        }
+                @if (Model.Updated.HasValue)
+                {
+                    <dt> Updated </dt>
+                    <dd> @Model.Updated.Value </dd>
+                }
 
-        <dt> Comments </dt>
-        <dd> @Model.TicketComments.ToList().Count</dd>
-
-    </dl>
+                <dt> Comments </dt>
+                <dd> @Model.TicketComments.ToList().Count</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+        <h2>Attachments</h2>
+        <div>
+            @foreach (var attachment in Model.TicketAttachments)
+            {
+                <img src="@attachment.FilePath" alt="@attachment.Description" />
+            }
+        </div>
+    </div>
 </div>
 @if (Model.Description != null)
 {
@@ -89,7 +103,7 @@
 <div class="row">
     <div class="col-sm-2">
         <form action="" method="post" enctype="multipart/form-data">
-            @Html.HiddenFor(m => m.Id);
+            @Html.HiddenFor(m => m.Id)
             <label for="file">Filename: </label>
             <input type="file" name="fileUpload" id="fileUpload" />
 

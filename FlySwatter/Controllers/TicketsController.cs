@@ -31,7 +31,7 @@ namespace FlySwatter.Controllers
         [Authorize]
         public ActionResult Details(int? id)
         {
-            var tickets = db.Tickets.Include(t => t.TicketComments);
+            var tickets = db.Tickets.Include(t => t.TicketComments).Include(t => t.TicketAttachments);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -69,7 +69,23 @@ namespace FlySwatter.Controllers
                 var file = fileUpload;
                 var fileName = Path.GetFileName(file.FileName);
                 var path = Path.Combine(Server.MapPath("~/App_Data/attachments"), fileName);
-                file.SaveAs(path); 
+                file.SaveAs(path);
+
+                var userId = User.Identity.GetUserId();
+                var url = "/App_Data/attachments/" + fileName;
+                var created = DateTimeOffset.UtcNow;
+                var description = "What?";
+                var attachment = new TicketAttachment()
+                {
+                    UserId = userId,
+                    Description = description,
+                    FileUrl = url,
+                    FilePath = path,
+                    Created = created,
+                    TicketId = ticket.Id,
+                };
+                db.TicketAttachments.Add(attachment);
+                db.SaveChanges(); 
                 return RedirectToAction("Details", "Tickets", new { id = ticket.Id });
             }
             return View(); 
