@@ -88,6 +88,17 @@
 <hr />
 <div class="row">
     <div class="col-sm-2">
+        <form action="" method="post" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.Id);
+            <label for="file">Filename: </label>
+            <input type="file" name="fileUpload" id="fileUpload" />
+
+            <input type="submit" />
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
     </div>
     <div class="col-sm-8">
         <div class="text-center comment-form">

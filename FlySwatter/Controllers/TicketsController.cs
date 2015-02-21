@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO; 
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,17 +18,17 @@ namespace FlySwatter.Controllers
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private ManageController mc = new ManageController(); 
+        private ManageController mc = new ManageController();
 
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets; 
+            var tickets = db.Tickets;
             return RedirectToActionPermanent("Index", "Home");
         }
 
         // GET: Tickets/Details/5
-        [Authorize] 
+        [Authorize]
         public ActionResult Details(int? id)
         {
             var tickets = db.Tickets.Include(t => t.TicketComments);
@@ -35,7 +36,7 @@ namespace FlySwatter.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = tickets.First(t => t.Id == id); 
+            Ticket ticket = tickets.First(t => t.Id == id);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -45,21 +46,33 @@ namespace FlySwatter.Controllers
 
         // POST: Tickets/Details/5
         [HttpPost]
-        public ActionResult Details(string commentBody, Ticket ticket)
+        public ActionResult Details(string commentBody, Ticket ticket, HttpPostedFileBase fileUpload)
         {
-            var date = DateTimeOffset.UtcNow;
-            var authorId = User.Identity.GetUserId();
-            var ticketId = ticket.Id;
-            var comment = new TicketComment()
+            if (commentBody != null)
             {
-                Created = date,
-                TicketId = ticketId,
-                UserId = authorId,
-                Comment = commentBody
-            };
-            db.TicketComments.Add(comment);
-            db.SaveChanges();
-            return RedirectToAction("Details", "Tickets", new { id = ticketId }); 
+                var date = DateTimeOffset.UtcNow;
+                var authorId = User.Identity.GetUserId();
+                var ticketId = ticket.Id;
+                var comment = new TicketComment()
+                {
+                    Created = date,
+                    TicketId = ticketId,
+                    UserId = authorId,
+                    Comment = commentBody
+                };
+                db.TicketComments.Add(comment);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Tickets", new { id = ticketId });
+            }
+            if (fileUpload.ContentLength > 0)
+            {
+                var file = fileUpload;
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/attachments"), fileName);
+                file.SaveAs(path); 
+                return RedirectToAction("Details", "Tickets", new { id = ticket.Id });
+            }
+            return View(); 
         }
 
         // GET: Tickets/Create
