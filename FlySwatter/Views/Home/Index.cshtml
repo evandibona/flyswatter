@@ -4,7 +4,7 @@
     ViewBag.Title = "Home";
     var color = new string[] { "", "cool", "lukewarm", "warmwarm", "hot" };
     var currentPage = Model.Tickets.PageNumber;
-    var pages = Model.Tickets.PageCount; 
+    var pages = Model.Tickets.PageCount;
 }
 
 <!-- This page should not even be shown unless the user is authenticated. -->
@@ -32,24 +32,18 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
-                            @Html.ActionLink("Priority", "Index", new { sortOrder = "priority" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Name", "Index", new { sortOrder = "title" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Project", "Index", new { sortOrder = "project" })
-                        </th>
-                        <th>
-                            @Html.ActionLink("Owner", "Index", new { sortOrder = "owned"})
-                        </th>
-                        <th>
-                            @Html.ActionLink("Assigned", "Index", new { sortOrder = "assigned"})
-                        </th>
-                        <th>
-                            @Html.ActionLink("Created", "Index", new { sortOrder = "created" })
-                        </th>
+                        @foreach (var heading in new string[] { "Priority", "Title", "Project", "Owner", "Assigned", "Created" })
+                        {
+                            var sortName = Model.SortOrder == null ? 
+                                heading.ToLower() : 
+                                Model.SortOrder ; 
+                            sortName = sortName.Any(c => c == '_') ? 
+                                heading.ToLower() :
+                                heading.ToLower() + "_desc" ;
+                            <th>
+                                @Html.ActionLink(heading, "Index", new { sortOrder = sortName })
+                            </th>
+                        }
                         <th> Description </th>
                     </tr>
                 </thead>
