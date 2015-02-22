@@ -4,3 +4,15 @@
     height: 5em; 
   } 
 }
+.picture-list {
+  overflow: hidden; 
+  img {
+    height: 8em; 
+    margin: 0.5em; 
+  }
+} 
+.image-caption {
+  font-style: italic; 
+  font-size: 0.8em; 
+  color: #666; 
+} 

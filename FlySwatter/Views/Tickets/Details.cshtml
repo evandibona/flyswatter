@@ -82,50 +82,51 @@
         </div>
     </div>
     <div class="col-sm-4">
+        @if (Model.Description != null)
+        {
+            <h5> Description </h5>
+            <p> @Model.Description </p>
+        }
     </div>
     <div class="col-sm-4">
-        <h2>Attachments</h2>
-        <div>
-            @foreach (var attachment in Model.TicketAttachments)
-            {
-                <img src="@attachment.FilePath" alt="@attachment.Description" />
-            }
+        <div class="row">
+            <h2>Add Attachment</h2>
+            <form class="input-group separate" action="" method="post" enctype="multipart/form-data">
+                @Html.HiddenFor(m => m.Id)
+                <input class="form-control" type="url" name="pictureUrl" placeholder="Url of Picture" />
+                <input class="form-control" type="text" name="aDescription" placeholder="Description..." />
+
+                <input type="submit" class="btn btn-success" />
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div ul class="picture-list text-center well">
+                    @foreach (var attachment in Model.TicketAttachments)
+                    {
+                        <a href="@attachment.FileUrl">
+                            <img src="@attachment.FileUrl" />
+                        </a>
+                        <p class="image-caption">@attachment.Description</p>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>
-@if (Model.Description != null)
-{
-    <h5> Description </h5>
-    <p> @Model.Description </p>
-}
 
 <hr />
 <div class="row">
-    <div class="col-sm-2">
-        <h2>Add Attachment</h2>
-        <form action="" method="post" enctype="multipart/form-data">
-            @Html.HiddenFor(m => m.Id)
-            <label for="file">Filename: </label>
-            <input type="file" name="fileUpload" id="fileUpload" />
-
-            <input type="text" name="aDescription" />
-
-            <input type="submit" />
-        </form>
-    </div>
-</div>
-<div class="row">
+    <h2 class="text-center">Comments</h2>
     <div class="col-sm-2">
     </div>
     <div class="col-sm-8">
         <div class="text-center comment-form">
-            @using (Html.BeginForm("Details", "Tickets", FormMethod.Post))
+            @using (Html.BeginForm("Details", "Tickets", FormMethod.Post, new { @class = "well form-group" }))
             {
                 Html.HiddenFor(m => m.Id);
-                <textarea name="commentBody"></textarea>
-                <div class="row">
-                    <input type="submit" value="Blammo!" name="submit" />
-                </div>
+                <textarea name="commentBody" class="form-control"></textarea>
+                <input type="submit" class="btn btn-primary" value="Post" name="submit" />
             }
         </div>
         <div class="row">
