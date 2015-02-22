@@ -102,10 +102,13 @@
 <hr />
 <div class="row">
     <div class="col-sm-2">
+        <h2>Add Attachment</h2>
         <form action="" method="post" enctype="multipart/form-data">
             @Html.HiddenFor(m => m.Id)
             <label for="file">Filename: </label>
             <input type="file" name="fileUpload" id="fileUpload" />
+
+            <input type="text" name="aDescription" />
 
             <input type="submit" />
         </form>

@@ -46,7 +46,7 @@ namespace FlySwatter.Controllers
 
         // POST: Tickets/Details/5
         [HttpPost]
-        public ActionResult Details(string commentBody, Ticket ticket, HttpPostedFileBase fileUpload)
+        public ActionResult Details(string commentBody, Ticket ticket, HttpPostedFileBase fileUpload, string aDescription)
         {
             if (commentBody != null)
             {
@@ -64,7 +64,7 @@ namespace FlySwatter.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Details", "Tickets", new { id = ticketId });
             }
-            if (fileUpload.ContentLength > 0)
+            if (fileUpload != null)
             {
                 var file = fileUpload;
                 var fileName = Path.GetFileName(file.FileName);
@@ -74,7 +74,7 @@ namespace FlySwatter.Controllers
                 var userId = User.Identity.GetUserId();
                 var url = "/App_Data/attachments/" + fileName;
                 var created = DateTimeOffset.UtcNow;
-                var description = "What?";
+                var description = aDescription ?? "";
                 var attachment = new TicketAttachment()
                 {
                     UserId = userId,
