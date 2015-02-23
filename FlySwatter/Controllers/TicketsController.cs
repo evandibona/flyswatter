@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO; 
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -80,10 +80,10 @@ namespace FlySwatter.Controllers
                     TicketId = ticket.Id,
                 };
                 db.TicketAttachments.Add(attachment);
-                db.SaveChanges(); 
+                db.SaveChanges();
                 return RedirectToAction("Details", "Tickets", new { id = ticket.Id });
             }
-            return View(); 
+            return View();
         }
 
         // GET: Tickets/Create
@@ -151,8 +151,17 @@ namespace FlySwatter.Controllers
         {
             if (ModelState.IsValid)
             {
+                var th = new TicketHistory()
+                {
+                    Changed = DateTimeOffset.UtcNow,
+                    UserId = User.Identity.GetUserId(), 
+                    TicketId = ticket.Id, 
+                };
+
+
+                ticket.Updated = DateTimeOffset.UtcNow;
+                db.TicketHistories.Add(th);
                 db.Entry(ticket).State = EntityState.Modified;
-                ticket.Updated = DateTimeOffset.Now;
                 db.SaveChanges();
                 return RedirectToActionPermanent("Index", "Home");
             }
