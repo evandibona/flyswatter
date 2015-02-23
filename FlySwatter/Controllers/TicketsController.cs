@@ -151,17 +151,20 @@ namespace FlySwatter.Controllers
         {
             if (ModelState.IsValid)
             {
-                var th = new TicketHistory()
-                {
-                    Changed = DateTimeOffset.UtcNow,
-                    UserId = User.Identity.GetUserId(), 
-                    TicketId = ticket.Id, 
-                };
+                //Ticket Title
+                var newTitle = new TicketHistory();
+                newTitle.Property = "title"; 
+                newTitle.NewValue = ticket.Title;
+                newTitle.OldValue = db.Tickets.First(t => t.Id == ticket.Id).Title;
+                newTitle.Changed = DateTimeOffset.UtcNow; 
+                newTitle.UserId = User.Identity.GetUserId(); 
+                newTitle.TicketId = ticket.Id; 
+                db.TicketHistories.Add(newTitle); 
 
 
-                ticket.Updated = DateTimeOffset.UtcNow;
-                db.TicketHistories.Add(th);
+
                 db.Entry(ticket).State = EntityState.Modified;
+                ticket.Updated = DateTimeOffset.UtcNow;
                 db.SaveChanges();
                 return RedirectToActionPermanent("Index", "Home");
             }
