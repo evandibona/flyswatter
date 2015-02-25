@@ -139,6 +139,7 @@ namespace FlySwatter.Controllers
             ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "Email", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "Email", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
+            TempData["ticket"] = ticket; 
             return View(ticket);
         }
 
@@ -151,17 +152,10 @@ namespace FlySwatter.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Ticket Title
-                /*
-                var newTitle = new TicketHistory();
-                newTitle.Property = "title"; 
-                newTitle.NewValue = ticket.Title;
-                newTitle.OldValue = db.Tickets.First(t => t.Id == ticket.Id).Title;
-                newTitle.Changed = DateTimeOffset.UtcNow; 
-                newTitle.UserId = User.Identity.GetUserId(); 
-                newTitle.TicketId = ticket.Id; 
-                db.TicketHistories.Add(newTitle); 
-                */
+                var newTicket = ticket;
+                var oldTicket = TempData["ticket"]; 
+
+                //Iterate properties adding to histories things that have changes (using oldTicket.TicketHistories) then drop newTicket
 
                 ticket.Updated = DateTimeOffset.UtcNow;
                 db.Entry(ticket).State = EntityState.Modified;
