@@ -12,10 +12,43 @@
 {
     <div class="row submitter">
         <div class="col-sm-12" style="padding-bottom: 5px; ">
-            <a href="/Users" class="btn btn-warning">List of Users</a>
-            <a href="/" class="btn btn-default">Reset</a>
-            <a href="/Tickets/Create" class="btn btn-indigo">New Ticket</a>
-            <a href="/Projects/Create" class="btn btn-sunny">New Project</a>
+            <div class="btn-group" role="group" >
+                <a class="btn btn-default" href="/">Reset Filters</a>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-warning dropdown-toggle" 
+                            data-toggle="dropdown" aria-expanded="false">
+                        Users
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/Users">List</a></li>
+                        <li><a href="/Users/Roles">Edit Roles <i style="color:#999">Admin Only</i></a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" 
+                            data-toggle="dropdown" aria-expanded="false">
+                        Projects
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/Projects">List</a></li>
+                        <li><a href="/Projects/Create">New</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger dropdown-toggle" 
+                            data-toggle="dropdown" aria-expanded="false">
+                        Users
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/Users">List</a></li>
+                        <li><a href="/Users/Create">New</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row submitter">

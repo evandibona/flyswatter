@@ -152,6 +152,7 @@ namespace FlySwatter.Controllers
             if (ModelState.IsValid)
             {
                 //Ticket Title
+                /*
                 var newTitle = new TicketHistory();
                 newTitle.Property = "title"; 
                 newTitle.NewValue = ticket.Title;
@@ -160,11 +161,10 @@ namespace FlySwatter.Controllers
                 newTitle.UserId = User.Identity.GetUserId(); 
                 newTitle.TicketId = ticket.Id; 
                 db.TicketHistories.Add(newTitle); 
+                */
 
-
-
-                db.Entry(ticket).State = EntityState.Modified;
                 ticket.Updated = DateTimeOffset.UtcNow;
+                db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToActionPermanent("Index", "Home");
             }
