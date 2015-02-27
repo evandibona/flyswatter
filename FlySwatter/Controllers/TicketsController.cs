@@ -139,7 +139,7 @@ namespace FlySwatter.Controllers
             ViewBag.AssignedUserId = new SelectList(db.Users, "Id", "Email", ticket.AssignedUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "Email", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
-            TempData["ticket"] = ticket; 
+            TempData["ticket"] = ticket;
             return View(ticket);
         }
 
@@ -153,14 +153,36 @@ namespace FlySwatter.Controllers
             if (ModelState.IsValid)
             {
                 var newTicket = ticket;
-                var oldTicket = TempData["ticket"]; 
+                Ticket oldTicket = (Ticket)TempData["ticket"];
+                var newHistories = new List<TicketHistory>();
 
                 //Iterate properties adding to histories things that have changes (using oldTicket.TicketHistories) then drop newTicket
+                if (newTicket.Title != oldTicket.Title)
+                {
+                    newHistories.Add( new TicketHistory()
+                        {
+                            Property = "Title",
+                            Changed = DateTimeOffset.UtcNow,
+                            OldValue = oldTicket.Title,
+                            NewValue = newTicket.Title,
+                            TicketId = oldTicket.Id, 
+                            UserId = User.Identity.GetUserId() 
+                        });
+                    oldTicket.Title = newTicket.Title; 
+                }
 
-                ticket.Updated = DateTimeOffset.UtcNow;
-                db.Entry(ticket).State = EntityState.Modified;
+                if (newHistories.Count > 0)
+                {
+                    foreach (var history in newHistories)
+                    {
+                        oldTicket.TicketHistories.Add(history); 
+                    }
+                }
+
+                oldTicket.Updated = DateTimeOffset.UtcNow;
+                db.Entry(oldTicket).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToActionPermanent("Index", "Home");
+                return View(oldTicket);
             }
             return View(ticket);
         }

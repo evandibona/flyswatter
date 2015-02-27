@@ -17,7 +17,7 @@
         case "In Progress":
         <h4 class="btn btn-info">In Progress</h4>
             break;
-            case "Pending":
+        case "Pending":
         <h4 class="btn btn-warning">Pending</h4>
             break;
         default:
@@ -83,6 +83,19 @@
                 <dd> @Model.TicketComments.ToList().Count</dd>
             </dl>
         </div>
+        <h3>Changes To This Ticket</h3>
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model.TicketHistories)
+                {
+                    <tr>
+                        <td> <strong>@item.Property</strong></td>
+                        <td class="text-warning"> @item.OldValue </td>
+                        <td class="text-success"> @item.NewValue </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
     <div class="col-sm-4">
         @if (Model.Description != null)
@@ -129,12 +142,12 @@
             {
                 Html.HiddenFor(m => m.Id);
                 <div class="row">
-                <div class="col-sm-10">
-                <textarea name="commentBody" class="form-control"></textarea>
-                </div>
-                <div class="col-sm-2">
-                <input type="submit" class="btn btn-primary" value="Post" name="submit" />
-                </div>
+                    <div class="col-sm-10">
+                        <textarea name="commentBody" class="form-control"></textarea>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="submit" class="btn btn-primary" value="Post" name="submit" />
+                    </div>
                 </div>
             }
         </div>
