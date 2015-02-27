@@ -83,19 +83,22 @@
                 <dd> @Model.TicketComments.ToList().Count</dd>
             </dl>
         </div>
-        <h3>Changes To This Ticket</h3>
-        <table class="table">
-            <tbody>
-                @foreach (var item in Model.TicketHistories)
-                {
-                    <tr>
-                        <td> <strong>@item.Property</strong></td>
-                        <td class="text-warning"> @item.OldValue </td>
-                        <td class="text-success"> @item.NewValue </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        @if (Model.TicketHistories.Count > 0)
+        {
+            <h3>Changes To This Ticket</h3>
+            <table class="table">
+                <tbody>
+                    @foreach (var item in Model.TicketHistories)
+                    {
+                        <tr>
+                            <td> <strong>@item.Property</strong></td>
+                            <td class="text-warning"> @item.OldValue </td>
+                            <td class="text-success"> @item.NewValue </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
     <div class="col-sm-4">
         @if (Model.Description != null)

@@ -31,7 +31,10 @@ namespace FlySwatter.Controllers
         [Authorize]
         public ActionResult Details(int? id)
         {
-            var tickets = db.Tickets.Include(t => t.TicketComments).Include(t => t.TicketAttachments);
+            var tickets = db.Tickets
+                .Include(t => t.TicketComments)
+                .Include(t => t.TicketAttachments)
+                .Include(t=> t.TicketHistories);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -48,6 +51,7 @@ namespace FlySwatter.Controllers
         [HttpPost]
         public ActionResult Details(string commentBody, Ticket ticket, string pictureUrl, string aDescription)
         {
+
             if (commentBody != null)
             {
                 var date = DateTimeOffset.UtcNow;
@@ -175,14 +179,14 @@ namespace FlySwatter.Controllers
                 {
                     foreach (var history in newHistories)
                     {
-                        oldTicket.TicketHistories.Add(history); 
+                        db.TicketHistories.Add(history); 
                     }
                 }
 
                 oldTicket.Updated = DateTimeOffset.UtcNow;
                 db.Entry(oldTicket).State = EntityState.Modified;
                 db.SaveChanges();
-                return View(oldTicket);
+                return RedirectToAction("Details\\" + oldTicket.Id.ToString()); 
             }
             return View(ticket);
         }
