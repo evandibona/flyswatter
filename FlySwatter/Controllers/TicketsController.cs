@@ -157,24 +157,30 @@ namespace FlySwatter.Controllers
             if (ModelState.IsValid)
             {
                 var newTicket = ticket;
+                newTicket.Updated = DateTimeOffset.UtcNow;
                 Ticket oldTicket = (Ticket)TempData["ticket"];
                 var newHistories = new List<TicketHistory>();
+                var properties = new string[] { "Title", "Description", "Updated" }; 
 
-                //Iterate properties adding to histories things that have changes (using oldTicket.TicketHistories) then drop newTicket
-                if (newTicket.Title != oldTicket.Title)
+                foreach (var p in properties)
                 {
-                    newHistories.Add( new TicketHistory()
-                        {
-                            Property = "Title",
-                            Changed = DateTimeOffset.UtcNow,
-                            OldValue = oldTicket.Title,
-                            NewValue = newTicket.Title,
-                            TicketId = oldTicket.Id, 
-                            UserId = User.Identity.GetUserId() 
-                        });
-                    oldTicket.Title = newTicket.Title; 
+                    var newValRaw = newTicket.GetType().GetProperty(p).GetValue(newTicket); 
+                    string newVal = newValRaw.ToString();
+                    string oldVal = oldTicket.GetType().GetProperty(p).GetValue(oldTicket).ToString();
+                    if (!String.Equals(newVal, oldVal, StringComparison.Ordinal))
+                    {
+                        newHistories.Add(new TicketHistory()
+                            {
+                                Property = p,
+                                Changed = DateTimeOffset.UtcNow,
+                                OldValue = oldVal.ToString(),
+                                NewValue = newVal.ToString(),
+                                TicketId = oldTicket.Id,
+                                UserId = User.Identity.GetUserId()
+                            });
+                        oldTicket.GetType().GetProperty(p).SetValue(oldTicket, newValRaw); 
+                    }
                 }
-
                 if (newHistories.Count > 0)
                 {
                     foreach (var history in newHistories)
@@ -183,7 +189,6 @@ namespace FlySwatter.Controllers
                     }
                 }
 
-                oldTicket.Updated = DateTimeOffset.UtcNow;
                 db.Entry(oldTicket).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details\\" + oldTicket.Id.ToString()); 
