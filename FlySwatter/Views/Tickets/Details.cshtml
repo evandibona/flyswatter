@@ -112,7 +112,7 @@
             <h2>Add Attachment</h2>
             <form class="input-group separate" action="" method="post" enctype="multipart/form-data">
                 @Html.HiddenFor(m => m.Id)
-                <input class="form-control" type="url" name="pictureUrl" placeholder="Url of Picture" />
+                <input class="form-control" type="file" name="pictureUrl" placeholder="Url of Picture" />
                 <input class="form-control" type="text" name="aDescription" placeholder="Description..." />
 
                 <input type="submit" class="btn btn-success" />
