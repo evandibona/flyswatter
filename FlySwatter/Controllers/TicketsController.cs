@@ -86,9 +86,8 @@ namespace FlySwatter.Controllers
                 };
                 db.TicketAttachments.Add(attachment);
                 db.SaveChanges();
-                return Redirect("Tickets/Details/" + ticket.Id); 
             }
-            return View();
+            return RedirectToAction("Details", "Tickets", ticket.Id.ToString()); 
         }
 
         // GET: Tickets/Create
